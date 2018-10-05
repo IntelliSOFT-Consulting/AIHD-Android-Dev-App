@@ -1,7 +1,8 @@
 package org.aihdint.aihd.fragments.initial;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -30,6 +30,7 @@ import org.json.JSONException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Developed by Rodney on 24/04/2018.
@@ -39,6 +40,7 @@ import java.util.Date;
 public class Initial_page_1 extends Fragment {
 
     private LinearLayout nhif_other_details;
+    private RadioGroup radioGroupDiabetes, radioGroupHypertention, radioGroupTB;
 
     private String occupation, education_level;
 
@@ -57,12 +59,22 @@ public class Initial_page_1 extends Fragment {
     private String diabetes_status, diabetes_family, diabetes_type, htn_status, htn_family, htn_type, hiv_status, enrolled_to_hiv_care, tb_status, tb_screen, nhif_status, referral_status,
             referral_inter, referral_intra, exercise, diet, smoking, drinking;
 
-    private Button buttonLMP;
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dm_initial_fragment_1, container, false);
+
+        diabetes_status = htn_status = hiv_status = nhif_status = referral_status = referral_inter = tb_status = tb_screen = complaint_other = "";
+
+        //RadioGroup
+        hiv_enrolled = view.findViewById(R.id.hiv_enrolled);
+        referral_patient = view.findViewById(R.id.interreferral_details);
+        radioGroupTB = view.findViewById(R.id.radioGroupTB);
+        radioGroupDiabetes = view.findViewById(R.id.radioGroupDiabetes);
+        radioGroupHypertention = view.findViewById(R.id.radioGroupHypertension);
+
+        //LinearLayout
+        nhif_other_details = view.findViewById(R.id.nhif_other_details);
+        //hiv_status_details = view.findViewById(R.id.hiv_status_details);
 
         //EditText
         dm_initial_dateEditText = view.findViewById(R.id.dm_initial_date);
@@ -79,6 +91,10 @@ public class Initial_page_1 extends Fragment {
         editTextLMP = view.findViewById(R.id.complaint_lmp);
         editTextRiskOther = view.findViewById(R.id.abuse_other);
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        dm_initial_dateEditText.setText(dateFormat.format(new Date())); // it will show 16/07/2013
+
+        DateCalendar.date(getActivity(), dm_initial_dateEditText);
         DateCalendar.date(getActivity(), editTextTBDate);
         DateCalendar.date(getActivity(), editTextLMP);
 
@@ -240,126 +256,114 @@ public class Initial_page_1 extends Fragment {
         Spinner educationLevelSpinner = view.findViewById(R.id.spinnerEducation);
         Spinner occupationSpinner = view.findViewById(R.id.spinnerOccupation);
 
-        //RadioGroup
-        hiv_enrolled = view.findViewById(R.id.hiv_enrolled);
-        referral_patient = view.findViewById(R.id.interreferral_details);
-
-        //LinearLayout
-        nhif_other_details = view.findViewById(R.id.nhif_other_details);
-        //hiv_status_details = view.findViewById(R.id.hiv_status_details);
-
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dm_initial_dateEditText.setText(dateFormat.format(new Date())); // it will show 16/07/2013
-
-        ArrayList<KeyValue> keyvalueOccupation = new ArrayList<>();
-        ArrayList<KeyValue> keyvalueEducation = new ArrayList<>();
-        //Add locations
-        // adding each child node to HashMap key => value
-        keyvalueOccupation.add(new KeyValue("", "Select Occupation"));
-        keyvalueOccupation.add(new KeyValue("1540", "Employed"));
-        keyvalueOccupation.add(new KeyValue("165170", "Unemployed"));
-        keyvalueOccupation.add(new KeyValue("161382", "Self Employed"));
-        keyvalueOccupation.add(new KeyValue("159465", "Student"));
-        keyvalueOccupation.add(new KeyValue("5622", "Other"));
-
-        // adding each child node to HashMap key => value
-        keyvalueEducation.add(new KeyValue("", "Select Education Level"));
-        keyvalueEducation.add(new KeyValue("1107", "None"));
-        keyvalueEducation.add(new KeyValue("160290", "Incomplete Primary"));
-        keyvalueEducation.add(new KeyValue("1713", "Primary"));
-        keyvalueEducation.add(new KeyValue("1714", "Secondary"));
-        keyvalueEducation.add(new KeyValue("160292", "Tertiary education"));
-
-        //fill data in spinner
-        ArrayAdapter<KeyValue> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, keyvalueOccupation);
-        occupationSpinner.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        //occupationSpinner.setSelection(adapter.getPosition(keyvalueOccupation.get(2)));//Optional to set the selected item.
-
-        occupationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                KeyValue value = (KeyValue) parent.getSelectedItem();
-                occupation = value.getId();
-                updateValues();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        //fill data in spinner
-        ArrayAdapter<KeyValue> adapter1 = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, keyvalueEducation);
-        educationLevelSpinner.setAdapter(adapter1);
-        adapter1.notifyDataSetChanged();
-        //spinnerLocation.setSelection(adapter.getPosition(keyvalue.get(2)));//Optional to set the selected item.
-
-        educationLevelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                KeyValue value = (KeyValue) parent.getSelectedItem();
-                education_level = value.getId();
-                updateValues();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        updateValues();
+        spinnerValue(getContext(), educationLevelSpinner, "education");
+        spinnerValue(getContext(), occupationSpinner, "occupations");
 
         return view;
     }
 
-    public void dmDiagnosis(String diagnosis) {
-        if (diagnosis.matches("165088")) {
+    public void spinnerValue(Context context, Spinner spinner, final String choice) {
+
+        ArrayList<KeyValue> keyvalue = new ArrayList<>();
+
+        // adding each child node to HashMap key => value
+        if ("occupations".equals(choice)) {
+            keyvalue.add(new KeyValue("", "Select Occupation"));
+            keyvalue.add(new KeyValue("1540", "Employed"));
+            keyvalue.add(new KeyValue("165170", "Unemployed"));
+            keyvalue.add(new KeyValue("161382", "Self Employed"));
+            keyvalue.add(new KeyValue("159465", "Student"));
+            keyvalue.add(new KeyValue("5622", "Other"));
+
+        } else if ("education".equals(choice)) {
+            // adding each child node to HashMap key => value
+            keyvalue.add(new KeyValue("", "Select Education Level"));
+            keyvalue.add(new KeyValue("1107", "None"));
+            keyvalue.add(new KeyValue("160290", "Incomplete Primary"));
+            keyvalue.add(new KeyValue("1713", "Primary"));
+            keyvalue.add(new KeyValue("1714", "Secondary"));
+            keyvalue.add(new KeyValue("160292", "Tertiary education"));
+        }
+
+        //fill data in spinner
+        ArrayAdapter<KeyValue> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, keyvalue);
+        spinner.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        //occupationSpinner.setSelection(adapter.getPosition(keyvalueOccupation.get(2)));//Optional to set the selected item.
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                KeyValue value = (KeyValue) parent.getSelectedItem();
+                if ("occupations".equals(choice)) {
+                    occupation = value.getId();
+                } else if ("education".equals(choice)) {
+                    education_level = value.getId();
+                }
+
+                updateValues();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+    }
+
+    public void selectionCheck() {
+
+        if (diabetes_status.matches("165088")) {
             editTextDiagnosisDiabetes.setVisibility(View.VISIBLE);
+            radioGroupDiabetes.setVisibility(View.VISIBLE);
         } else {
             editTextDiagnosisDiabetes.setVisibility(View.GONE);
+            radioGroupDiabetes.setVisibility(View.GONE);
         }
-    }
 
-    public void htnDiagnosis(String status) {
-        if (status.matches("165093")) {
+        if (htn_status.matches("165093")) {
             editTextDiagnosisHypertension.setVisibility(View.VISIBLE);
+            radioGroupHypertention.setVisibility(View.VISIBLE);
         } else {
             editTextDiagnosisHypertension.setVisibility(View.GONE);
+            radioGroupHypertention.setVisibility(View.GONE);
         }
-    }
 
-    public void hivStatus(String status) {
-        if (status.matches("138571")) {
+        if (hiv_status.matches("138571")) {
             hiv_enrolled.setVisibility(View.VISIBLE);
         } else {
             hiv_enrolled.setVisibility(View.GONE);
         }
-    }
 
-    public void nhifStatus(String status) {
-        if (status.matches("5622")) {
+        if (nhif_status.matches("5622")) {
             nhif_other_details.setVisibility(View.VISIBLE);
         } else {
             nhif_other_details.setVisibility(View.GONE);
         }
-    }
 
-    public void referralStatus(String status) {
-        if (status.matches("1065")) {
+        if (referral_status.matches("1065")) {
             referral_patient.setVisibility(View.VISIBLE);
         } else {
             referral_patient.setVisibility(View.GONE);
         }
-    }
 
-    public void complaintStatus(String status) {
-        if (status.matches("5622")) {
+        if (complaint_other.matches("5622")) {
             editTextComplaintOther.setVisibility(View.VISIBLE);
         } else {
             editTextComplaintOther.setVisibility(View.GONE);
+        }
+
+        if (tb_screen.matches("1065")) {
+            radioGroupTB.setVisibility(View.VISIBLE);
+        } else {
+            radioGroupTB.setVisibility(View.GONE);
+        }
+
+        if (tb_status.matches("1659")) {
+            editTextTBDate.setVisibility(View.VISIBLE);
+        } else {
+            editTextTBDate.setVisibility(View.GONE);
         }
     }
 
@@ -399,17 +403,14 @@ public class Initial_page_1 extends Fragment {
                     case R.id.radio_new_dm_patient:
                         if (checked)
                             diabetes_status = "165087";
-                        dmDiagnosis(diabetes_status);
                         break;
                     case R.id.radio_known_dm_patient:
                         if (checked)
                             diabetes_status = "165088";
-                        dmDiagnosis(diabetes_status);
                         break;
                     case R.id.radio_na_dm_patient:
                         if (checked)
                             diabetes_status = "1175";
-                        dmDiagnosis(diabetes_status);
                         break;
                     case R.id.radio_dm_patient_family_yes:
                         if (checked)
@@ -438,17 +439,14 @@ public class Initial_page_1 extends Fragment {
                     case R.id.radio_new_htn_patient:
                         if (checked)
                             htn_status = "165092";
-                        htnDiagnosis(htn_status);
                         break;
                     case R.id.radio_known_htn_patient:
                         if (checked)
                             htn_status = "165093";
-                        htnDiagnosis(htn_status);
                         break;
                     case R.id.radio_na_htn_patient:
                         if (checked)
                             htn_status = "1175";
-                        htnDiagnosis(htn_status);
                         break;
                     case R.id.radio_htn_patient_family_yes:
                         if (checked)
@@ -477,17 +475,14 @@ public class Initial_page_1 extends Fragment {
                     case R.id.radio_hiv_negative:
                         if (checked)
                             hiv_status = "664";
-                        hivStatus(hiv_status);
                         break;
                     case R.id.radio_hiv_positive:
                         if (checked)
                             hiv_status = "138571";
-                        hivStatus(hiv_status);
                         break;
                     case R.id.radio_hiv_unknown:
                         if (checked)
                             hiv_status = "1067";
-                        hivStatus(hiv_status);
                         break;
                     case R.id.radio_enrolled_yes:
                         if (checked)
@@ -500,12 +495,10 @@ public class Initial_page_1 extends Fragment {
                     case R.id.radio_nhif_yes:
                         if (checked)
                             nhif_status = "1065";
-                        nhifStatus(nhif_status);
                         break;
                     case R.id.radio_nhif_no:
                         if (checked)
                             nhif_status = "1066";
-                        nhifStatus(nhif_status);
                         Alerts.alert_msg(getContext(), "NHIF Registration", "Encourage Client to Register for NHIF");
                         break;
                     case R.id.radio_tb_yes:
@@ -535,17 +528,14 @@ public class Initial_page_1 extends Fragment {
                     case R.id.radio_nhif_other:
                         if (checked)
                             nhif_status = "5622";
-                        nhifStatus(nhif_status);
                         break;
                     case R.id.radio_referral_yes:
                         if (checked)
                             referral_status = "1065";
-                        referralStatus(referral_status);
                         break;
                     case R.id.radio_referral_no:
                         if (checked)
                             referral_status = "1066";
-                        referralStatus(referral_status);
                         break;
                     case R.id.radio_referral_chw:
                         if (checked)
@@ -630,7 +620,7 @@ public class Initial_page_1 extends Fragment {
                     default:
                         break;
                 }
-
+                selectionCheck();
                 updateValues();
             }
         });
@@ -735,15 +725,15 @@ public class Initial_page_1 extends Fragment {
                     case R.id.checkbox_complaint_other:
                         if (checked) {
                             complaint_other = "5622";
-                            complaintStatus(complaint_other);
                         } else {
                             complaint_other = "";
-                            complaintStatus(complaint_other);
                         }
                         break;
                     default:
                         break;
                 }
+
+                selectionCheck();
                 updateValues();
             }
         });

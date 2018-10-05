@@ -1,13 +1,6 @@
 package org.aihdint.aihd;
 
-import android.Manifest;
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -15,9 +8,7 @@ import android.view.MenuItem;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import android.content.Intent;
@@ -30,14 +21,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import org.aihdint.aihd.app.Config;
+import org.aihdint.aihd.app.Variables;
 
 public class MainActivity extends AppCompatActivity {
 
     // LogCat tag
     private static final String TAG = MainActivity.class.getSimpleName();
-
-    private CoordinatorLayout coordinatorLayout;
 
     // Camera activity request codes
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
@@ -56,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        coordinatorLayout = findViewById(R.id.coordinatorLayout);
+        //CoordinatorLayout coordinatorLayout = findViewById(R.id.coordinatorLayout);
         Button btnCapturePicture = findViewById(R.id.btnCapturePicture);
 
         Intent intent = getIntent();
@@ -196,13 +185,13 @@ public class MainActivity extends AppCompatActivity {
         File mediaStorageDir = new File(
                 Environment
                         .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                Config.IMAGE_DIRECTORY_NAME);
+                Variables.IMAGE_DIRECTORY_NAME);
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d(TAG, "Oops! Failed create "
-                        + Config.IMAGE_DIRECTORY_NAME + " directory");
+                        + Variables.IMAGE_DIRECTORY_NAME + " directory");
                 return null;
             }
         }

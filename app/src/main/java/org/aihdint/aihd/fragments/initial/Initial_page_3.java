@@ -1,6 +1,8 @@
 package org.aihdint.aihd.fragments.initial;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,9 +21,6 @@ import org.aihdint.aihd.common.Alerts;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import static java.lang.Double.parseDouble;
 
 /**
@@ -30,6 +29,7 @@ import static java.lang.Double.parseDouble;
 @SuppressWarnings("FieldCanBeLocal")
 public class Initial_page_3 extends Fragment {
 
+    private View view;
     private EditText editTextRBS, editTextFBC, editTextHBA, editTextUrea, editTextSodium, editTextChloride, editTextPotassium, editTextCreatinine, editTextHDL, editTextLDL, editTextCholesterol,
             editTextTriglcerides, editTextAST, editTextALT, editTextTotalBilirubin, editTextDirectBilirubin, editTextGamma;
 
@@ -47,8 +47,8 @@ public class Initial_page_3 extends Fragment {
     private String glucose, glucose_plus, protein, protein_plus, ketone, ketone_plus, ecg, cxr;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dm_initial_fragment_3, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.dm_initial_fragment_3, container, false);
 
         editTextRBS = view.findViewById(R.id.blood_work_rbs);
         editTextFBC = view.findViewById(R.id.blood_work_fbc);
@@ -220,15 +220,10 @@ public class Initial_page_3 extends Fragment {
 
         editText.addTextChangedListener(new TextWatcher() {
 
-            private Timer timer = new Timer();
-            private final long DELAY = 1500; // milliseconds
-
             @Override
             public void afterTextChanged(final Editable editable) {
-                timer.cancel();
-                timer = new Timer();
-
-                final Runnable checkRunnable = new Runnable() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
                     public void run() {
                         if (editText.length() > 0 && !field.matches("")) {
 
@@ -236,15 +231,7 @@ public class Initial_page_3 extends Fragment {
                             checkAlert(value, field);
                         }
                     }
-                };
-
-                TimerTask task = new TimerTask() {
-                    public void run() {
-                        getActivity().runOnUiThread(checkRunnable);
-                    }
-                };
-
-                timer.schedule(task, DELAY);
+                }, 3000);
 
                 updateValues();
             }
@@ -264,38 +251,73 @@ public class Initial_page_3 extends Fragment {
     }
 
     public void checkAlert(double value, String field) {
-        if (value > 11.1 && field.matches("rbs")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal RBS");
-        } else if (value < 7.8 && field.matches("fbc")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal FBS");
-        } else if (value > 6.5 && field.matches("hba")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal HBA 1c(%)");
-        } else if ((value < 2.7 || value > 8) && field.matches("urea")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal Urea");
-        } else if ((value < 135 || value > 155) && field.matches("sodium")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal Sodium");
-        } else if ((value < 98 || value > 108) && field.matches("chloride")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal Chloride");
-        } else if ((value < 3.5 || value > 5.5) && field.matches("potassium")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal Potassium");
-        } else if ((value < 0.7 || value > 1.9) && field.matches("hdl")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal HDL");
-        } else if (value > 3.4 && field.matches("ldl")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal LDL");
-        } else if ((value < 0 || value > 5.7) && field.matches("cholesterol")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal Cholesterol");
-        } else if ((value < 0 || value > 5.7) && field.matches("triglcerides")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal Triglcerides");
-        } else if ((value < 0 || value > 42) && field.matches("ast")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal AST");
-        } else if ((value < 0 || value > 37) && field.matches("alt")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal ALT");
-        } else if ((value < 1.17 || value > 20.5) && field.matches("tbilirubin")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal Total Bilirubin");
-        } else if (value > 5.1 && field.matches("dbilirubin")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal Direct Bilirubin");
-        } else if ((value < 9 || value > 48) && field.matches("gamma")) {
-            Alerts.alert_msg(getContext(), "Investigation Alert", "Abnormal Gamma");
+        switch (field) {
+            case "rbs":
+                if (value > 11.1)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal RBS");
+                break;
+            case "fbc":
+                if (value < 7.8)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal FBS");
+                break;
+            case "hba":
+                if (value > 6.5)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal HBA 1c(%)");
+                break;
+            case "urea":
+                if (value < 2.7 || value > 8)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Urea");
+                break;
+            case "sodium":
+                if (value < 135 || value > 155)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Sodium");
+                break;
+            case "chloride":
+                if (value < 98 || value > 108)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Chloride");
+                break;
+            case "potassium":
+                if (value < 3.5 || value > 5.5)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Potassium");
+                break;
+            case "hdl":
+                if (value < 0.7 || value > 1.9)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal HDL");
+                break;
+            case "ldl":
+                if (value > 3.4)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal LDL");
+                break;
+            case "cholesterol":
+                if (value < 0 || value > 5.7)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Cholesterol");
+                break;
+            case "triglcerides":
+                if (value < 0 || value > 5.7)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Triglcerides");
+                break;
+            case "ast":
+                if (value < 0 || value > 42)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal AST");
+                break;
+            case "alt":
+                if (value < 0 || value > 37)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal ALT");
+                break;
+            case "tbilirubin":
+                if (value < 1.17 || value > 20.5)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Total Bilirubin");
+                break;
+            case "dbilirubin":
+                if (value > 5.1)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Direct Bilirubin");
+                break;
+            case "gamma":
+                if (value < 9 || value > 48)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Gamma");
+                break;
+            default:
+                break;
         }
 
     }
@@ -430,27 +452,27 @@ public class Initial_page_3 extends Fragment {
 
         JSONArray jsonArry = new JSONArray();
 
-        jsonArry.put(JSONFormBuilder.observations("887", "", "valueText", editTextRBS.getText().toString().trim(), editTextRBSDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("160912", "", "valueText", editTextFBC.getText().toString().trim(), editTextFBCDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("159644", "", "valueText", editTextHBA.getText().toString().trim(), editTextHBADate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("887", "", "valueNumeric", editTextRBS.getText().toString().trim(), editTextRBSDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("160912", "", "valueNumeric", editTextFBC.getText().toString().trim(), editTextFBCDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("159644", "", "valueNumeric", editTextHBA.getText().toString().trim(), editTextHBADate.getText().toString().trim(), ""));
 
-        jsonArry.put(JSONFormBuilder.observations("165297", "", "valueText", editTextUrea.getText().toString().trim(), editTextUreaDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165297", "", "valueNumeric", editTextUrea.getText().toString().trim(), editTextUreaDate.getText().toString().trim(), ""));
 
-        jsonArry.put(JSONFormBuilder.observations("165298", "", "valueText", editTextSodium.getText().toString().trim(), editTextSodiumDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("165299", "", "valueText", editTextChloride.getText().toString().trim(), editTextChlorideDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("165300", "", "valueText", editTextPotassium.getText().toString().trim(), editTextPotassiumDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("164364", "", "valueText", editTextCreatinine.getText().toString().trim(), editTextCreatinineDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165298", "", "valueNumeric", editTextSodium.getText().toString().trim(), editTextSodiumDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165299", "", "valueNumeric", editTextChloride.getText().toString().trim(), editTextChlorideDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165300", "", "valueNumeric", editTextPotassium.getText().toString().trim(), editTextPotassiumDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("164364", "", "valueNumeric", editTextCreatinine.getText().toString().trim(), editTextCreatinineDate.getText().toString().trim(), ""));
 
-        jsonArry.put(JSONFormBuilder.observations("1007", "", "valueText", editTextHDL.getText().toString().trim(), editTextHDLDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("1008", "", "valueText", editTextLDL.getText().toString().trim(), editTextLDLDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("1006", "", "valueText", editTextCholesterol.getText().toString().trim(), editTextCholesterolDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("1007", "", "valueNumeric", editTextHDL.getText().toString().trim(), editTextHDLDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("1008", "", "valueNumeric", editTextLDL.getText().toString().trim(), editTextLDLDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("1006", "", "valueNumeric", editTextCholesterol.getText().toString().trim(), editTextCholesterolDate.getText().toString().trim(), ""));
         jsonArry.put(JSONFormBuilder.observations("1009", "", "valueText", editTextTriglcerides.getText().toString().trim(), editTextTriglceridesDate.getText().toString().trim(), ""));
 
-        jsonArry.put(JSONFormBuilder.observations("653", "", "valueText", editTextAST.getText().toString().trim(), editTextASTDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("654", "", "valueText", editTextALT.getText().toString().trim(), editTextALTDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("655", "", "valueText", editTextTotalBilirubin.getText().toString().trim(), editTextTotalBilirubinDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("1297", "", "valueText", editTextDirectBilirubin.getText().toString().trim(), editTextDirectBilirubinDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("159829", "", "valueText", editTextGamma.getText().toString().trim(), editTextGammaDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("653", "", "valueNumeric", editTextAST.getText().toString().trim(), editTextASTDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("654", "", "valueNumeric", editTextALT.getText().toString().trim(), editTextALTDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("655", "", "valueNumeric", editTextTotalBilirubin.getText().toString().trim(), editTextTotalBilirubinDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("1297", "", "valueNumeric", editTextDirectBilirubin.getText().toString().trim(), editTextDirectBilirubinDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("159829", "", "valueNumeric", editTextGamma.getText().toString().trim(), editTextGammaDate.getText().toString().trim(), ""));
 
         jsonArry.put(JSONFormBuilder.observations("159733", "", "valueCoded", glucose, editTextGlucoseDate.getText().toString().trim(), ""));
         jsonArry.put(JSONFormBuilder.observations("159733", "", "valueCoded", glucose_plus, editTextGlucoseDate.getText().toString().trim(), ""));

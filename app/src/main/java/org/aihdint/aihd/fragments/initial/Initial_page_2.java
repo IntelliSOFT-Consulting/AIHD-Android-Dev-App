@@ -1,6 +1,8 @@
 package org.aihdint.aihd.fragments.initial;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,9 +24,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import customfonts.TextView_Roboto_Bold;
 
 /**
@@ -33,6 +32,7 @@ import customfonts.TextView_Roboto_Bold;
 
 public class Initial_page_2 extends Fragment {
 
+    private View view;
     private LinearLayout linearLayoutPastCurrentMedication, linearLayoutOtherPastCurrentMedication, linearLayoutExamOther, linearLayoutExtremities;
 
     private EditText editTextMetformin, editTextGlibenclamide, editTextInsulin, editTextNPH, editTextSolubleInsulin, editTextEnalapril, editTextHCTZ,
@@ -52,8 +52,8 @@ public class Initial_page_2 extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dm_initial_fragment_2, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.dm_initial_fragment_2, container, false);
 
         linearLayoutPastCurrentMedication = view.findViewById(R.id.past_current_medication);
         linearLayoutOtherPastCurrentMedication = view.findViewById(R.id.other_past_current_medication);
@@ -152,11 +152,11 @@ public class Initial_page_2 extends Fragment {
         bmi = view.findViewById(R.id.bmi);
         waist_hip_ratio = view.findViewById(R.id.waist_hip_ratio);
 
-        textWatcher(editTextTemp, "editTextTemp");
-        textWatcher(editTextPulseRate, "editTextPulseRate");
-        textWatcher(editTextSystolicOne, "");
+        textWatcher(editTextTemp, "temp");
+        textWatcher(editTextPulseRate, "pulseRate");
+        textWatcher(editTextSystolicOne, "blood_pressure");
         textWatcher(editTextSystolicTwo, "blood_pressure");
-        textWatcher(editTextDiastolicOne, "");
+        textWatcher(editTextDiastolicOne, "blood_pressure");
         textWatcher(editTextDiastolicTwo, "blood_pressure");
         textWatcher(editTextHeight, "bmi");
         textWatcher(editTextWeight, "bmi");
@@ -169,8 +169,8 @@ public class Initial_page_2 extends Fragment {
         textWatcher(editTextRS, "");
         textWatcher(editTextPA, "");
         textWatcher(editTextCNS, "");
-        textWatcher(editTextMonofilamentRF, "");
-        textWatcher(editTextMonofilamentLF, "");
+        textWatcher(editTextMonofilamentRF, "monofilament");
+        textWatcher(editTextMonofilamentLF, "monofilament");
 
         RadioButton radioButtonExamFair = view.findViewById(R.id.radio_exam_fair);
         RadioButton radioButtonExamGood = view.findViewById(R.id.radio_exam_good);
@@ -277,49 +277,45 @@ public class Initial_page_2 extends Fragment {
 
         editText.addTextChangedListener(new TextWatcher() {
 
-            private Timer timer = new Timer();
-            private final long DELAY = 1500; // milliseconds
-
             @Override
             public void afterTextChanged(final Editable editable) {
-                timer.cancel();
-                timer = new Timer();
-
-                final Runnable checkRunnable = new Runnable() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
                     public void run() {
-                        if (check.matches("editTextTemp")) {
-                            Common.checkTemp(getContext(), editable.toString());
-                        } else if (check.matches("editTextPulseRate")) {
-                            Common.checkPR(getContext(), editable.toString());
-                        } else if (check.matches("blood_pressure")) {
-                            if (editTextSystolicTwo != null && editTextDiastolicTwo != null) {
-                                Common.checkBP(getContext(), editTextSystolicOne, editTextDiastolicOne, editTextSystolicTwo, editTextDiastolicTwo);
-                            } else if (editTextSystolicOne != null && editTextDiastolicOne != null) {
-                                Common.checkBP(getContext(), editTextSystolicOne, editTextDiastolicOne, editTextSystolicTwo, editTextDiastolicTwo);
-                            }
-                        } else if (check.matches("bmi")) {
-                            Common.bmi(getContext(), editTextHeight, editTextWeight, bmi);
-                        } else if (check.matches("whr")) {
-                            Common.whr(editTextWaist, editTextHip, waist_hip_ratio);
-                        } else if (check.matches("editTextmMonofilamentLF")) {
-                            Common.monofilament(getContext(), editable.toString());
-                        } else if (check.matches("editTextmMonofilamentRF")) {
-                            Common.monofilament(getContext(), editable.toString());
+
+                        switch (check) {
+                            case "temp":
+                                Common.checkTemp(linearLayoutPastCurrentMedication, editable.toString());
+                                break;
+                            case "pulseRate":
+                                Common.checkPR(linearLayoutPastCurrentMedication, editable.toString());
+                                break;
+                            case "blood_pressure":
+                                if (editTextSystolicTwo != null && editTextDiastolicTwo != null) {
+                                    Common.checkBP(view, editTextSystolicTwo, editTextDiastolicTwo);
+                                }
+
+                                if (editTextSystolicOne != null && editTextDiastolicOne != null) {
+                                    Common.checkBP(view, editTextSystolicOne, editTextDiastolicOne);
+                                }
+                                break;
+                            case "bmi":
+                                Common.bmi(getContext(), editTextHeight, editTextWeight, bmi);
+                                break;
+                            case "whr":
+                                Common.whr(editTextWaist, editTextHip, waist_hip_ratio);
+                                break;
+                            case "monofilament":
+                                Common.monofilament(view, editable.toString());
+                                break;
+                            case "Monofilament":
+                                Common.monofilament(view, editable.toString());
+                                break;
+                            default:
+                                break;
                         }
                     }
-                };
-
-                TimerTask task = new TimerTask() {
-                    public void run() {
-                        try {
-                            getActivity().runOnUiThread(checkRunnable);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-
-                timer.schedule(task, DELAY);
+                }, 4000);
 
                 updateValues();
             }
@@ -329,12 +325,14 @@ public class Initial_page_2 extends Fragment {
             public void beforeTextChanged(CharSequence s, int start,
                                           int count, int after) {
                 /*Check text Change before typing*/
+                // TODO: No current action
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 /*Check text Change while typing*/
+                // TODO: No current action
             }
         });
     }
@@ -347,9 +345,10 @@ public class Initial_page_2 extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 boolean checked = (buttonView).isChecked();
+                int value = checkBox.getId();
 
                 //Check which checkbox was clicked
-                switch (checkBox.getId()) {
+                switch (value) {
                     case R.id.checkbox_medication_none:
                         if (checked) {
                             medication_none = "1107";
@@ -553,9 +552,10 @@ public class Initial_page_2 extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Is the button now checked?
                 boolean checked = (buttonView).isChecked();
+                int value = radioButton.getId();
 
                 // Check which radio button was clicked
-                switch (radioButton.getId()) {
+                switch (value) {
                     case R.id.radio_adhere_yes:
                         if (checked)
                             adhere_medication = "1065";
@@ -746,13 +746,8 @@ public class Initial_page_2 extends Fragment {
 
             jsonArry = JSONFormBuilder.concatArray(jsonArry);
 
-
-            if (jsonArry1.length() > 0) {
-                jsonGroup.put(jsonArry1);
-            }
-            if (jsonArry2.length() > 0) {
-                jsonGroup.put(jsonArry2);
-            }
+            jsonGroup = JSONFormBuilder.checkLength(jsonArry1, jsonGroup);
+            jsonGroup = JSONFormBuilder.checkLength(jsonArry2, jsonGroup);
 
             if (jsonGroup.length() > 0) {
                 JSONObject jsonObject = new JSONObject();
