@@ -1,6 +1,8 @@
 package org.aihdint.aihd.fragments.initial;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -32,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import static org.aihdint.aihd.forms.DM_Initial.gender;
+
 /**
  * Developed by Rodney on 24/04/2018.
  */
@@ -59,6 +63,9 @@ public class Initial_page_1 extends Fragment {
     private String diabetes_status, diabetes_family, diabetes_type, htn_status, htn_family, htn_type, hiv_status, enrolled_to_hiv_care, tb_status, tb_screen, nhif_status, referral_status,
             referral_inter, referral_intra, exercise, diet, smoking, drinking;
 
+    private CheckBox checkBoxTBStatus;
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dm_initial_fragment_1, container, false);
@@ -74,7 +81,12 @@ public class Initial_page_1 extends Fragment {
 
         //LinearLayout
         nhif_other_details = view.findViewById(R.id.nhif_other_details);
+        LinearLayout lmp = view.findViewById(R.id.linearLayoutLMP);
         //hiv_status_details = view.findViewById(R.id.hiv_status_details);
+
+        if (gender != null && gender.equals("F")) {
+            lmp.setVisibility(View.VISIBLE);
+        }
 
         //EditText
         dm_initial_dateEditText = view.findViewById(R.id.dm_initial_date);
@@ -94,7 +106,7 @@ public class Initial_page_1 extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         dm_initial_dateEditText.setText(dateFormat.format(new Date())); // it will show 16/07/2013
 
-        DateCalendar.date(getActivity(), dm_initial_dateEditText);
+        DateCalendar.fulldate(getActivity(), dm_initial_dateEditText);
         DateCalendar.date(getActivity(), editTextTBDate);
         DateCalendar.date(getActivity(), editTextLMP);
 
@@ -224,7 +236,7 @@ public class Initial_page_1 extends Fragment {
         radioCheck(radioButtonTBUknown);
 
         //Checkboxes
-        CheckBox checkBoxTBStatus = view.findViewById(R.id.checkbox_tb_status);
+        checkBoxTBStatus = view.findViewById(R.id.checkbox_tb_status);
         CheckBox checkBoxBreathing = view.findViewById(R.id.checkbox_complaint_breath);
         CheckBox checkBoxPalpitations = view.findViewById(R.id.checkbox_complaint_palpitations);
         CheckBox checkBoxDizziness = view.findViewById(R.id.checkbox_complaint_dizziness);
@@ -312,60 +324,84 @@ public class Initial_page_1 extends Fragment {
 
     }
 
-    public void selectionCheck() {
 
-        if (diabetes_status.matches("165088")) {
+    public void diabetes(String status) {
+
+        if (status.matches("165088")) {
             editTextDiagnosisDiabetes.setVisibility(View.VISIBLE);
+            radioGroupDiabetes.setVisibility(View.VISIBLE);
+        } else if (status.matches("165087")) {
             radioGroupDiabetes.setVisibility(View.VISIBLE);
         } else {
             editTextDiagnosisDiabetes.setVisibility(View.GONE);
             radioGroupDiabetes.setVisibility(View.GONE);
         }
 
-        if (htn_status.matches("165093")) {
+    }
+
+    public void hypertension(String status) {
+        if (status.matches("165093")) {
             editTextDiagnosisHypertension.setVisibility(View.VISIBLE);
+            radioGroupHypertention.setVisibility(View.VISIBLE);
+        } else if (status.matches("165092")) {
             radioGroupHypertention.setVisibility(View.VISIBLE);
         } else {
             editTextDiagnosisHypertension.setVisibility(View.GONE);
             radioGroupHypertention.setVisibility(View.GONE);
         }
+    }
 
-        if (hiv_status.matches("138571")) {
+    public void hivStatus(String status) {
+        if (status.matches("138571")) {
             hiv_enrolled.setVisibility(View.VISIBLE);
         } else {
             hiv_enrolled.setVisibility(View.GONE);
         }
+    }
 
-        if (nhif_status.matches("5622")) {
+    public void nhifStatus(String status) {
+        if (status.matches("5622")) {
             nhif_other_details.setVisibility(View.VISIBLE);
         } else {
             nhif_other_details.setVisibility(View.GONE);
         }
+    }
 
-        if (referral_status.matches("1065")) {
+    public void referralStatus(String status) {
+
+        if (status.matches("1065")) {
             referral_patient.setVisibility(View.VISIBLE);
         } else {
             referral_patient.setVisibility(View.GONE);
         }
+    }
 
-        if (complaint_other.matches("5622")) {
+    public void complaint(String status) {
+        if (status.matches("5622")) {
             editTextComplaintOther.setVisibility(View.VISIBLE);
         } else {
             editTextComplaintOther.setVisibility(View.GONE);
         }
+    }
 
-        if (tb_screen.matches("1065")) {
+    public void tbScreen(String status) {
+        if (status.matches("1065")) {
             radioGroupTB.setVisibility(View.VISIBLE);
         } else {
             radioGroupTB.setVisibility(View.GONE);
         }
+    }
 
-        if (tb_status.matches("1659")) {
+    public void tbStatus(String status) {
+        if (status.matches("1065")) {
+            checkBoxTBStatus.setVisibility(View.VISIBLE);
             editTextTBDate.setVisibility(View.VISIBLE);
         } else {
+            checkBoxTBStatus.setVisibility(View.GONE);
             editTextTBDate.setVisibility(View.GONE);
         }
     }
+
 
     public void textWatcher(EditText editText) {
 
@@ -515,15 +551,15 @@ public class Initial_page_1 extends Fragment {
                         break;
                     case R.id.radio_tb_status_negative:
                         if (checked)
-                            tb_status = "664";
+                            tb_status = "1066";
                         break;
                     case R.id.radio_tb_status_positive:
                         if (checked)
-                            tb_status = "138571";
+                            tb_status = "1065";
                         break;
                     case R.id.radio_tb_status_unknown:
                         if (checked)
-                            tb_status = "1067";
+                            tb_status = "1175";
                         break;
                     case R.id.radio_nhif_other:
                         if (checked)
@@ -607,20 +643,26 @@ public class Initial_page_1 extends Fragment {
                         break;
                     case R.id.radio_drink_yes:
                         if (checked)
-                            drinking = "1065";
+                            drinking = "159450";
                         break;
                     case R.id.radio_drink_no:
                         if (checked)
-                            drinking = "1066";
+                            drinking = "1090";
                         break;
                     case R.id.radio_drink_stopped:
                         if (checked)
-                            drinking = "158939";
+                            drinking = "159452";
                         break;
                     default:
                         break;
                 }
-                selectionCheck();
+                diabetes(diabetes_status);
+                hypertension(htn_status);
+                hivStatus(hiv_status);
+                tbScreen(tb_screen);
+                tbStatus(tb_status);
+                nhifStatus(nhif_status);
+                referralStatus(referral_status);
                 updateValues();
             }
         });
@@ -640,7 +682,7 @@ public class Initial_page_1 extends Fragment {
                 switch (checkBox.getId()) {
                     case R.id.checkbox_tb_status:
                         if (checked) {
-                            tb_treatment = "1659";
+                            tb_treatment = "1662";
                         } else {
                             tb_treatment = "";
                         }
@@ -733,7 +775,7 @@ public class Initial_page_1 extends Fragment {
                         break;
                 }
 
-                selectionCheck();
+                complaint(complaint_other);
                 updateValues();
             }
         });

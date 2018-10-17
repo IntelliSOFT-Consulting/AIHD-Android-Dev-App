@@ -11,6 +11,7 @@ import com.orm.query.Condition;
 import com.orm.query.Select;
 
 import org.aihdint.aihd.R;
+import org.aihdint.aihd.app.AppController;
 import org.aihdint.aihd.model.Concepts;
 import org.json.JSONObject;
 
@@ -138,6 +139,79 @@ public class Common {
         }
     }
 
+
+    public static void checkAlert(View view, double value, String field) {
+        switch (field) {
+            case "rbs":
+                if (value > 11.1)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal RBS");
+                break;
+            case "fbc":
+                if (value < 7.8)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal FBS");
+                break;
+            case "hba":
+                if (value > 6.5)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal HBA 1c(%)");
+                break;
+            case "urea":
+                if (value < 2.7 || value > 8)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Urea");
+                break;
+            case "sodium":
+                if (value < 135 || value > 155)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Sodium");
+                break;
+            case "chloride":
+                if (value < 98 || value > 108)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Chloride");
+                break;
+            case "potassium":
+                if (value < 3.5 || value > 5.5)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Potassium");
+                break;
+            case "hdl":
+                if (value < 0.7 || value > 1.9)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal HDL");
+                break;
+            case "ldl":
+                if (value > 3.4)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal LDL");
+                break;
+            case "cholesterol":
+                if (value < 0 || value > 5.7)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Cholesterol");
+                break;
+            case "triglcerides":
+                if (value < 0 || value > 5.7)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Triglcerides");
+                break;
+            case "ast":
+                if (value < 0 || value > 42)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal AST");
+                break;
+            case "alt":
+                if (value < 0 || value > 37)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal ALT");
+                break;
+            case "tbilirubin":
+                if (value < 1.17 || value > 20.5)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Total Bilirubin");
+                break;
+            case "dbilirubin":
+                if (value > 5.1)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Direct Bilirubin");
+                break;
+            case "gamma":
+                if (value < 9 || value > 48)
+                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Gamma");
+                break;
+            default:
+                break;
+        }
+
+    }
+
     public static String conceptAnswer(JSONObject concept, String concept_id) {
         String value = "";
         try {
@@ -170,6 +244,16 @@ public class Common {
         }
         return value;
 
+    }
+
+
+    public static String locationId() {
+        String location_id = AppController.getInstance().getSessionManager().getUserDetails().get("location_id");
+        location_id = location_id.toLowerCase();
+        location_id = location_id.replace(".", "");
+        location_id = location_id.replace(" ", "_");
+
+        return location_id;
     }
 
 }

@@ -11,17 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import org.aihdint.aihd.common.DateCalendar;
 import org.aihdint.aihd.common.JSONFormBuilder;
 import org.aihdint.aihd.R;
-import org.aihdint.aihd.common.Alerts;
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import static java.lang.Double.parseDouble;
+import static org.aihdint.aihd.common.Common.checkAlert;
+import static org.aihdint.aihd.forms.DM_Initial.gender;
 
 /**
  * Developed by Rodney on 24/04/2018.
@@ -49,6 +51,12 @@ public class Initial_page_3 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dm_initial_fragment_3, container, false);
+
+        LinearLayout pdt = view.findViewById(R.id.linearLayoutPDT);
+
+        if (gender != null && gender.equals("F")) {
+            pdt.setVisibility(View.VISIBLE);
+        }
 
         editTextRBS = view.findViewById(R.id.blood_work_rbs);
         editTextFBC = view.findViewById(R.id.blood_work_fbc);
@@ -97,31 +105,55 @@ public class Initial_page_3 extends Fragment {
         editTextECGDate = view.findViewById(R.id.datetime_ecg);
         editTextCXRDate = view.findViewById(R.id.datetime_cxr);
 
-        DateCalendar.date(getActivity(), editTextRBSDate);
-        DateCalendar.date(getActivity(), editTextFBCDate);
-        DateCalendar.date(getActivity(), editTextHBADate);
-        DateCalendar.date(getActivity(), editTextUreaDate);
-        DateCalendar.date(getActivity(), editTextSodiumDate);
-        DateCalendar.date(getActivity(), editTextChlorideDate);
-        DateCalendar.date(getActivity(), editTextPotassiumDate);
-        DateCalendar.date(getActivity(), editTextCreatinineDate);
-        DateCalendar.date(getActivity(), editTextHDLDate);
-        DateCalendar.date(getActivity(), editTextLDLDate);
-        DateCalendar.date(getActivity(), editTextCholesterolDate);
-        DateCalendar.date(getActivity(), editTextTriglceridesDate);
-        DateCalendar.date(getActivity(), editTextASTDate);
-        DateCalendar.date(getActivity(), editTextALTDate);
-        DateCalendar.date(getActivity(), editTextTotalBilirubinDate);
-        DateCalendar.date(getActivity(), editTextDirectBilirubinDate);
-        DateCalendar.date(getActivity(), editTextGammaDate);
-        DateCalendar.date(getActivity(), editTextUltraSound);
-        DateCalendar.date(getActivity(), editTextPDTDate);
-        DateCalendar.date(getActivity(), editTextGlucoseDate);
-        DateCalendar.date(getActivity(), editTextProteinDate);
-        DateCalendar.date(getActivity(), editTextKetoneDate);
-        DateCalendar.date(getActivity(), editTextDepositsDate);
-        DateCalendar.date(getActivity(), editTextECGDate);
-        DateCalendar.date(getActivity(), editTextCXRDate);
+        editTextRBSDate.setText(DateCalendar.date());
+        editTextFBCDate.setText(DateCalendar.date());
+        editTextHBADate.setText(DateCalendar.date());
+        editTextUreaDate.setText(DateCalendar.date());
+        editTextSodiumDate.setText(DateCalendar.date());
+        editTextChlorideDate.setText(DateCalendar.date());
+        editTextPotassiumDate.setText(DateCalendar.date());
+        editTextCreatinineDate.setText(DateCalendar.date());
+        editTextHDLDate.setText(DateCalendar.date());
+        editTextLDLDate.setText(DateCalendar.date());
+        editTextCholesterolDate.setText(DateCalendar.date());
+        editTextTriglceridesDate.setText(DateCalendar.date());
+        editTextASTDate.setText(DateCalendar.date());
+        editTextALTDate.setText(DateCalendar.date());
+        editTextTotalBilirubinDate.setText(DateCalendar.date());
+        editTextDirectBilirubinDate.setText(DateCalendar.date());
+        editTextGammaDate.setText(DateCalendar.date());
+        editTextGlucoseDate.setText(DateCalendar.date());
+        editTextProteinDate.setText(DateCalendar.date());
+        editTextKetoneDate.setText(DateCalendar.date());
+        editTextDepositsDate.setText(DateCalendar.date());
+        editTextECGDate.setText(DateCalendar.date());
+        editTextCXRDate.setText(DateCalendar.date());
+
+        DateCalendar.fulldate(getActivity(), editTextRBSDate);
+        DateCalendar.fulldate(getActivity(), editTextFBCDate);
+        DateCalendar.fulldate(getActivity(), editTextHBADate);
+        DateCalendar.fulldate(getActivity(), editTextUreaDate);
+        DateCalendar.fulldate(getActivity(), editTextSodiumDate);
+        DateCalendar.fulldate(getActivity(), editTextChlorideDate);
+        DateCalendar.fulldate(getActivity(), editTextPotassiumDate);
+        DateCalendar.fulldate(getActivity(), editTextCreatinineDate);
+        DateCalendar.fulldate(getActivity(), editTextHDLDate);
+        DateCalendar.fulldate(getActivity(), editTextLDLDate);
+        DateCalendar.fulldate(getActivity(), editTextCholesterolDate);
+        DateCalendar.fulldate(getActivity(), editTextTriglceridesDate);
+        DateCalendar.fulldate(getActivity(), editTextASTDate);
+        DateCalendar.fulldate(getActivity(), editTextALTDate);
+        DateCalendar.fulldate(getActivity(), editTextTotalBilirubinDate);
+        DateCalendar.fulldate(getActivity(), editTextDirectBilirubinDate);
+        DateCalendar.fulldate(getActivity(), editTextGammaDate);
+        DateCalendar.fulldate(getActivity(), editTextUltraSound);
+        DateCalendar.fulldate(getActivity(), editTextPDTDate);
+        DateCalendar.fulldate(getActivity(), editTextGlucoseDate);
+        DateCalendar.fulldate(getActivity(), editTextProteinDate);
+        DateCalendar.fulldate(getActivity(), editTextKetoneDate);
+        DateCalendar.fulldate(getActivity(), editTextDepositsDate);
+        DateCalendar.fulldate(getActivity(), editTextECGDate);
+        DateCalendar.fulldate(getActivity(), editTextCXRDate);
 
         textWatcher(editTextRBS, "rbs");
         textWatcher(editTextFBC, "fbc");
@@ -228,7 +260,7 @@ public class Initial_page_3 extends Fragment {
                         if (editText.length() > 0 && !field.matches("")) {
 
                             double value = parseDouble(editable.toString().trim());
-                            checkAlert(value, field);
+                            checkAlert(view, value, field);
                         }
                     }
                 }, 3000);
@@ -250,77 +282,7 @@ public class Initial_page_3 extends Fragment {
         });
     }
 
-    public void checkAlert(double value, String field) {
-        switch (field) {
-            case "rbs":
-                if (value > 11.1)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal RBS");
-                break;
-            case "fbc":
-                if (value < 7.8)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal FBS");
-                break;
-            case "hba":
-                if (value > 6.5)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal HBA 1c(%)");
-                break;
-            case "urea":
-                if (value < 2.7 || value > 8)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Urea");
-                break;
-            case "sodium":
-                if (value < 135 || value > 155)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Sodium");
-                break;
-            case "chloride":
-                if (value < 98 || value > 108)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Chloride");
-                break;
-            case "potassium":
-                if (value < 3.5 || value > 5.5)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Potassium");
-                break;
-            case "hdl":
-                if (value < 0.7 || value > 1.9)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal HDL");
-                break;
-            case "ldl":
-                if (value > 3.4)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal LDL");
-                break;
-            case "cholesterol":
-                if (value < 0 || value > 5.7)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Cholesterol");
-                break;
-            case "triglcerides":
-                if (value < 0 || value > 5.7)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Triglcerides");
-                break;
-            case "ast":
-                if (value < 0 || value > 42)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal AST");
-                break;
-            case "alt":
-                if (value < 0 || value > 37)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal ALT");
-                break;
-            case "tbilirubin":
-                if (value < 1.17 || value > 20.5)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Total Bilirubin");
-                break;
-            case "dbilirubin":
-                if (value > 5.1)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Direct Bilirubin");
-                break;
-            case "gamma":
-                if (value < 9 || value > 48)
-                    Alerts.errorMessage(view, "Investigation Alert: Abnormal Gamma");
-                break;
-            default:
-                break;
-        }
 
-    }
 
     public void urinalysisGlucose(String status) {
         if (status.matches("1066")) {
@@ -466,7 +428,7 @@ public class Initial_page_3 extends Fragment {
         jsonArry.put(JSONFormBuilder.observations("1007", "", "valueNumeric", editTextHDL.getText().toString().trim(), editTextHDLDate.getText().toString().trim(), ""));
         jsonArry.put(JSONFormBuilder.observations("1008", "", "valueNumeric", editTextLDL.getText().toString().trim(), editTextLDLDate.getText().toString().trim(), ""));
         jsonArry.put(JSONFormBuilder.observations("1006", "", "valueNumeric", editTextCholesterol.getText().toString().trim(), editTextCholesterolDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("1009", "", "valueText", editTextTriglcerides.getText().toString().trim(), editTextTriglceridesDate.getText().toString().trim(), ""));
+        jsonArry.put(JSONFormBuilder.observations("1009", "", "valueNumeric", editTextTriglcerides.getText().toString().trim(), editTextTriglceridesDate.getText().toString().trim(), ""));
 
         jsonArry.put(JSONFormBuilder.observations("653", "", "valueNumeric", editTextAST.getText().toString().trim(), editTextASTDate.getText().toString().trim(), ""));
         jsonArry.put(JSONFormBuilder.observations("654", "", "valueNumeric", editTextALT.getText().toString().trim(), editTextALTDate.getText().toString().trim(), ""));
@@ -487,7 +449,7 @@ public class Initial_page_3 extends Fragment {
 
         jsonArry.put(JSONFormBuilder.observations("159565", "", "valueCoded", ecg, editTextECGDate.getText().toString().trim(), ""));
         jsonArry.put(JSONFormBuilder.observations("12", "", "valueCoded", cxr, editTextCXRDate.getText().toString().trim(), ""));
-        jsonArry.put(JSONFormBuilder.observations("165302", "", "valueDate", editTextUltraSound.getText().toString().trim(), DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165302", "", "valueText", editTextUltraSound.getText().toString().trim(), DateCalendar.date(), ""));
 
         jsonArry.put(JSONFormBuilder.observations("165312", "", "valueText", editTextPDT.getText().toString().trim(), DateCalendar.date(), ""));
         jsonArry.put(JSONFormBuilder.observations("165144", "", "valueDate", editTextPDTDate.getText().toString().trim(), DateCalendar.date(), ""));
