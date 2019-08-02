@@ -39,14 +39,24 @@
             android:value="org.aihdint.aihd" />
 
         <activity
-            android:name=".Login"
+            android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".introSlider.IntroActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".Login"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name=".patient.Register"
@@ -81,6 +91,18 @@
         <activity
             android:name=".forms.DM_FollowUp"
             android:label="DM HTN Follow Up "
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Resources.ResourcesActivity"
+            android:label="@string/resources"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Resources.HelpdeskActivity"
+            android:label="@string/helpdesk"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
 
@@ -149,7 +171,38 @@
             android:name=".services.LoadPatients"
             android:exported="false"
             android:process=":loadPatients" />
+        <service
+            android:name=".services.LoadAlarm"
+            android:exported="false"
+            android:process=":loadAlarm" />
 
+        <!-- Receiver -->
+
+        <receiver
+            android:name=".app.ScheduledReceiver"
+            android:process=":alarmReceiver" />
+
+        <activity
+            android:name=".Resources.Pdf1"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Resources.Pdf2"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Resources.Pdf3"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Resources.Pdf4"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Resources.Pdf5"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

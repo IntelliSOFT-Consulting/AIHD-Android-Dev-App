@@ -15,12 +15,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import org.aihdint.aihd.R;
 import org.aihdint.aihd.Home;
 import org.aihdint.aihd.Login;
+import org.aihdint.aihd.Resources.HelpdeskActivity;
+import org.aihdint.aihd.Resources.ResourcesActivity;
 import org.aihdint.aihd.app.AppController;
 import org.aihdint.aihd.patient.Patients;
-import org.aihdint.aihd.R;
-import org.aihdint.aihd.patient.Register;
 
 /**
  * Developed by Rodney on 20/03/2018.
@@ -112,22 +113,30 @@ public class NavigationDrawerShare implements NavigationView.OnNavigationItemSel
             forms.putExtra("isForm", "3");
             mContext.startActivity(forms);
             ((Activity)mContext).finish();
-        }*/ else if (id == R.id.nav_add_patients) {
+        } else if (id == R.id.nav_add_patients) {
             Intent add_patient = new Intent(mContext.getApplicationContext(), Register.class);
             mContext.startActivity(add_patient);
             ((Activity) mContext).finish();
-        } else if (id == R.id.nav_patients) {
+        } */ else if (id == R.id.nav_patients) {
             Intent patient = new Intent(mContext.getApplicationContext(), Patients.class);
             patient.putExtra("isForm", "0");
             mContext.startActivity(patient);
             ((Activity) mContext).finish();
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_resources) {
+            Intent resources = new Intent(mContext.getApplicationContext(), ResourcesActivity.class);
+            mContext.startActivity(resources);
+            ((Activity) mContext).finish();
+        }else if (id == R.id.nav_helpdesk) {
+            Intent resources = new Intent(mContext.getApplicationContext(), HelpdeskActivity.class);
+            mContext.startActivity(resources);
+            ((Activity) mContext).finish();
+        }else if (id == R.id.nav_share) {
             Alerts launch = new Alerts(mContext);
             //launch.alert_msg(this,"The Long Road","Maybe its a hard, loong road");
             launch.share(mContext);
         } else if (id == R.id.nav_logout) {
             // Session manager
-            AppController.getInstance().getSessionManager().clear();
+            AppController.getInstance().getSessionManager().setLogin(false);
 
             Intent login = new Intent(mContext.getApplicationContext(), Login.class);
             mContext.startActivity(login);

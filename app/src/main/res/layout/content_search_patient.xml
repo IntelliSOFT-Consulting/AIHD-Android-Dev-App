@@ -19,73 +19,102 @@
 
     </android.support.design.widget.AppBarLayout>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:id="@+id/linearLayout">
-
-    <!-- Search patient -->
-
-    <FrameLayout
-        android:id="@+id/cover"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginTop="65dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/linear"
+        <!-- Search patient -->
+
+        <FrameLayout
+            android:id="@+id/cover"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="bottom"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:elevation="8dp"
-            android:layout_marginBottom="10dp"
-            tools:targetApi="lollipop">
+            android:layout_height="75dp"
+            android:layout_marginTop="65dp">
 
-            <customfonts.EditText_Roboto
-                android:id="@+id/input_search"
+            <android.support.v7.widget.CardView
+                android:id="@+id/linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rect"
-                android:hint="@string/search"
-                android:textColorHint="@color/half_black"
-                android:textSize="14sp"
-                android:inputType="text"
-                android:imeActionLabel="Done"
-                android:imeOptions="actionDone"
-                android:textColor="@color/grey"
-                android:padding="15dp"
-                android:maxLines="1"
-                android:drawableRight="@drawable/search"
-                android:drawableEnd="@drawable/search"
-                android:elevation="8dp"/>
+                android:orientation="vertical"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:elevation="8dp"
+                android:layout_marginBottom="10dp"
+                tools:targetApi="lollipop">
 
-        </android.support.v7.widget.CardView>
-    </FrameLayout>
+                <!--    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="1">-->
 
-    <!--
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-        -->
+                <customfonts.EditText_Roboto
+                    android:id="@+id/input_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rect"
+                    android:hint="@string/search"
+                    android:textColorHint="@color/half_black"
+                    android:textSize="14sp"
+                    android:inputType="text"
+                    android:imeActionLabel="Done"
+                    android:imeOptions="actionDone"
+                    android:textColor="@color/grey"
+                    android:padding="15dp"
+                    android:maxLines="1"
+                    android:drawableRight="@drawable/search"
+                    android:drawableEnd="@drawable/search"
+                    android:elevation="8dp"/>
 
-    <com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
-        android:id="@+id/swipyrefreshlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srl_direction="both">
+                <!-- <Button
+                     android:id="@+id/btnRegister"
+                     android:visibility="gone"
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:layout_weight=".3"
+                     android:layout_margin="10dp"
+                     android:layout_gravity="center"
+                     android:background="@drawable/rounded_button"
+                     android:gravity="center"
+                     android:padding="5dp"
+                     android:text="@string/register"
+                     android:textAllCaps="false"
+                     android:onClick="register"
+                     android:textColor="#ffffff" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/my_recycler_view"
+             </LinearLayout>-->
+
+            </android.support.v7.widget.CardView>
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/rounded_button"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="@string/register"
+            android:textAllCaps="false"
+            android:onClick="register"
+            android:textColor="#ffffff" />
 
-    </com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout>
+        <com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
+            android:id="@+id/swipyrefreshlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srl_direction="both">
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-</LinearLayout>
+        </com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout>
+
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
