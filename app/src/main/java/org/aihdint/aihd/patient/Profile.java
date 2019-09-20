@@ -19,6 +19,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,18 +60,21 @@ public class Profile extends AppCompatActivity implements CompoundButton.OnCheck
         patient_id = intent.getStringExtra("patient_id");
         gender = intent.getStringExtra("gender");
 
-        List<PatientProfile> patient = PatientProfile.findWithQuery(PatientProfile.class, "SELECT * FROM PATIENT_PROFILE WHERE patient_id = ? ", patient_id);
-
-        for (PatientProfile pn : patient) {
-            records = pn.getMedicationFile();
-            Log.d("Records", records + "");
-        }
-
         TextView textViewName = findViewById(R.id.patient_name);
         textViewName.setText(name);
 
+        if (patient_id != null) {
+            List<PatientProfile> patient = PatientProfile.findWithQuery(PatientProfile.class, "SELECT * FROM PATIENT_PROFILE WHERE patient_id = ? ", patient_id);
+
+            for (PatientProfile pn : patient) {
+                records = pn.getMedicationFile();
+                Log.d("Records", records + "");
+            }
+        }
+
+
         TextView textViewIdentifier = findViewById(R.id.patient_identifier);
-        if (!identifier.isEmpty()) {
+        if (identifier != null) {
             textViewIdentifier.setText(identifier);
         }
 
@@ -252,20 +257,6 @@ public class Profile extends AppCompatActivity implements CompoundButton.OnCheck
     }
     */
 
-    public void admission(View view) {
-        Intent admission = new Intent(getApplicationContext(), Admission.class);
-        admission.putExtra("patient_id", patient_id);
-        startActivity(admission);
-        finish();
-    }
-
-    public void footClinic(View view) {
-
-        Intent foot_clinic = new Intent(getApplicationContext(), FootClinic.class);
-        foot_clinic.putExtra("patient_id", patient_id);
-        startActivity(foot_clinic);
-        finish();
-    }
 
     public void transfer(View view) {
 
@@ -279,11 +270,10 @@ public class Profile extends AppCompatActivity implements CompoundButton.OnCheck
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
         // Set Dialog Title
-        alertDialog.setTitle("Patient Deceased");
+        alertDialog.setTitle("Mark Patient As Deceased");
 
         // Set Dialog Message
-        alertDialog.setMessage("Patient Status?");
-        LinearLayout lp = new LinearLayout(this);
+        final LinearLayout lp = new LinearLayout(this);
         lp.setOrientation(LinearLayout.VERTICAL);
 
         CheckBox checkBox = new CheckBox(this);
@@ -291,13 +281,49 @@ public class Profile extends AppCompatActivity implements CompoundButton.OnCheck
         checkBox.setId(R.id.checkBoxDeceased);
         checkBox.setText(R.string.deceased);
 
-        EditText editText = new EditText(this);
-        editText.setId(R.id.editTextDeath);
-        editText.setInputType(InputType.TYPE_CLASS_TEXT);
-        editText.setHint("Cause of death?");
+        final EditText editTextCause = new EditText(this);
+        editTextCause.setId(R.id.editTextDeath);
+        editTextCause.setInputType(InputType.TYPE_CLASS_TEXT);
+        editTextCause.setHint("Other Cause of death?");
+
+        EditText editTextDeathDate = new EditText(this);
+        editTextDeathDate.setId(R.id.editTextDeath);
+        editTextDeathDate.setInputType(InputType.TYPE_CLASS_DATETIME);
+        editTextDeathDate.setHint("YYYY-MM-DD");
+
+        final RadioGroup radioGroup = new RadioGroup(this);
+        final RadioButton[] radioButtons = new RadioButton[3];
+        radioGroup.setOrientation(RadioGroup.VERTICAL);
+
+        for (int i = 0; i < 3; i++) {
+            String text = "Other";
+            if (i == 0) {
+                text = "DM";
+            } else if (i == 1) {
+                text = "HTN";
+            }
+            radioButtons[i] = new RadioButton(this);
+            radioButtons[i].setText(text);
+            radioButtons[i].setId(i);
+            radioGroup.addView(radioButtons[i]);
+        }
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+                if (checkedId == 2) {
+                    lp.addView(editTextCause);
+                } else {
+                    lp.removeView(editTextCause);
+                }
+            }
+        });
+
 
         lp.addView(checkBox);
-        lp.addView(editText);
+        lp.addView(editTextDeathDate);
+        lp.addView(radioGroup);
         lp.setPadding(50, 40, 50, 10);
 
         alertDialog.setView(lp);
