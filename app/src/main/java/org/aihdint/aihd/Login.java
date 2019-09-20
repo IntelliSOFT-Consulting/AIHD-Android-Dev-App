@@ -67,7 +67,7 @@ public class Login extends Activity {
             if (isConnected) {
                 loginServer(username, password);
             } else {
-                Alerts.errorMessage(linearLayout, "No Internet Connection,Unable to Log In");
+                Alerts.errorMessage(linearLayout, "No Internet Connection");
             }
 
         } else {

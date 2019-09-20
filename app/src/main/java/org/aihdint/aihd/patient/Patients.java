@@ -44,6 +44,7 @@ public class Patients extends AppCompatActivity implements SwipyRefreshLayout.On
     private String IsForm;
     private SwipyRefreshLayout swipeRefreshLayout;
     private Button buttonRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +125,7 @@ public class Patients extends AppCompatActivity implements SwipyRefreshLayout.On
             person.setFamily_name(pn.getFamily_name());
             person.setGiven_name(pn.getGiven_name());
             person.setGender(pn.getGender());
-           // person.setNational_id(pn.getNational_id());
+            // person.setNational_id(pn.getNational_id());
             person.setTelephone(pn.getTelephone());
             person.set_status("0");
             person.setIsReport(IsForm);

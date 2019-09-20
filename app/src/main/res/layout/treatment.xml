@@ -92,7 +92,7 @@
                         android:layout_height="match_parent" />
 
                     <include
-                        layout="@layout/treatment_antihypertensives"
+                        layout="@layout/treatment_group_z"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 

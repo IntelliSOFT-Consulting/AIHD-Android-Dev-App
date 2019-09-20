@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="checkBoxDeceased" type="id" />
+    <item name="checkBoxConfirmDeceased" type="id" />
+    <item name="radioCauseDeath" type="id" />
     <item name="editTextDeath" type="id" />
+    <item name="editTextDeathDate" type="id" />
     <item name="privacy_policy_link" type="id"/>
 </resources>

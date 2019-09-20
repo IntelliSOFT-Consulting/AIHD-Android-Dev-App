@@ -209,7 +209,8 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
             showDialog();
 
             // Inserting row in users table
-            new Person(family_name, given_name, gender, birthdate, telephone, location_id, "0");
+            Person person = new Person(family_name, given_name, gender, birthdate, telephone, location_id, "0");
+            person.save();
 
             ConnectivityManager cm =
                     (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);

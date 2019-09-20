@@ -62,7 +62,7 @@
     <string name="nairobi_city_council">Nairobi City County</string>
     <string name="pending">Pending</string>
     <string name="uploaded">Uploaded</string>
-    <string name="deceased">Is the patient deceased?</string>
+    <string name="deceased">Confirm patient is deceased</string>
     <string name="malteser_international">Malteser International</string>
     <string name="logout">Logout</string>
     <string name="share">Share</string>
@@ -70,6 +70,7 @@
     <string name="helpdesk">Helpdesk</string>
     <string name="communicate">Communicate</string>
     <string name="dm_htn_follow_up">DM HTN Follow Up</string>
+    <string name="dm_htn_reports">DM HTN Reports</string>
     <string name="patients">Patients</string>
     <string name="add_patients">Add Patients</string>
     <string name="home">Home</string>

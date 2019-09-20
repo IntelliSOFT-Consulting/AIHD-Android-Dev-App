@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import org.aihdint.aihd.R;
@@ -32,17 +33,23 @@ import java.util.ArrayList;
 
 public class Initial_page_6 extends Fragment {
 
-    private EditText editTextReturnDate, editTextFacility, editTextDateReffered, editTextHealthFacility, editTextDateOut, editTextReffered, editTextRefferalReason, editTextSupportGroup,
+    private EditText editTextAdmitReason,editTextReturnDate, editTextFacility, editTextDateReffered, editTextHealthFacility, editTextDateOut, editTextReffered, editTextRefferalReason, editTextSupportGroup,
             editTextProvider;
 
     private String continueCare, referFacility, transferFacility, managementDM, managementHTN, eyeReview, surgicalReview, renalReview,
             cvdReview, nutrition, physiotherapy, followUpOther;
 
-    private String supportGroup, designation;
+    private String supportGroup, designation, admit;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dm_initial_fragment_6, container, false);
+
+        RadioButton radioButtonAdmitYes = view.findViewById(R.id.radio_admit_yes);
+        RadioButton radioButtonAdmitNo = view.findViewById(R.id.radio_admit_no);
+
+        radioButton(radioButtonAdmitYes);
+        radioButton(radioButtonAdmitNo);
 
         //Follow Up Plan
         CheckBox checkBoxContinueCare = view.findViewById(R.id.followup_continue);
@@ -58,19 +65,20 @@ public class Initial_page_6 extends Fragment {
         CheckBox checkBoxPhysiotherapy = view.findViewById(R.id.followup_physiotherapy);
         CheckBox checkBoxFollowUpOther = view.findViewById(R.id.followup_other);
 
-        checkBoxTreatment(checkBoxContinueCare);
-        checkBoxTreatment(checkBoxReferFacility);
-        checkBoxTreatment(checkBoxTransferFacility);
-        checkBoxTreatment(checkBoxManagementDM);
-        checkBoxTreatment(checkBoxManagementHTN);
-        checkBoxTreatment(checkBoxEyeReview);
-        checkBoxTreatment(checkBoxSurgicalReview);
-        checkBoxTreatment(checkBoxRenalReview);
-        checkBoxTreatment(checkBoxCVDReview);
-        checkBoxTreatment(checkBoxNutrition);
-        checkBoxTreatment(checkBoxPhysiotherapy);
-        checkBoxTreatment(checkBoxFollowUpOther);
+        checkBoxFollowUp(checkBoxContinueCare);
+        checkBoxFollowUp(checkBoxReferFacility);
+        checkBoxFollowUp(checkBoxTransferFacility);
+        checkBoxFollowUp(checkBoxManagementDM);
+        checkBoxFollowUp(checkBoxManagementHTN);
+        checkBoxFollowUp(checkBoxEyeReview);
+        checkBoxFollowUp(checkBoxSurgicalReview);
+        checkBoxFollowUp(checkBoxRenalReview);
+        checkBoxFollowUp(checkBoxCVDReview);
+        checkBoxFollowUp(checkBoxNutrition);
+        checkBoxFollowUp(checkBoxPhysiotherapy);
+        checkBoxFollowUp(checkBoxFollowUpOther);
 
+        editTextAdmitReason = view.findViewById(R.id.admit_reason);
         editTextReturnDate = view.findViewById(R.id.followup_date);
         editTextFacility = view.findViewById(R.id.facility);
         editTextDateReffered = view.findViewById(R.id.date_referred);
@@ -180,7 +188,7 @@ public class Initial_page_6 extends Fragment {
     }
 
 
-    public void checkBoxTreatment(final CheckBox checkBox) {
+    public void checkBoxFollowUp(final CheckBox checkBox) {
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -198,72 +206,115 @@ public class Initial_page_6 extends Fragment {
                         } else {
                             continueCare = "";
                         }
+                        break;
                     case R.id.followup_refer:
                         if (checked) {
                             referFacility = "164165";
                         } else {
                             referFacility = "";
                         }
+                        break;
                     case R.id.followup_transfer:
                         if (checked) {
                             transferFacility = "1285";
                         } else {
                             transferFacility = "";
                         }
+                        break;
                     case R.id.followup_further_management_dm:
                         if (checked) {
                             managementDM = "165133";
                         } else {
                             managementDM = "";
                         }
+                        break;
                     case R.id.followup_further_management_htn:
                         if (checked) {
                             managementHTN = "165135";
                         } else {
                             managementHTN = "";
                         }
+                        break;
                     case R.id.followup_eye_review:
                         if (checked) {
                             eyeReview = "165138";
                         } else {
                             eyeReview = "";
                         }
+                        break;
                     case R.id.followup_surgical_review:
                         if (checked) {
                             surgicalReview = "165137";
                         } else {
                             surgicalReview = "";
                         }
+                        break;
                     case R.id.followup_renal_review:
                         if (checked) {
                             renalReview = "165136";
                         } else {
                             renalReview = "";
                         }
+                        break;
                     case R.id.followup_cvd_review:
                         if (checked) {
                             cvdReview = "119270";
                         } else {
                             cvdReview = "";
                         }
+                        break;
                     case R.id.followup_nutrition:
                         if (checked) {
                             nutrition = "160552";
                         } else {
                             nutrition = "";
                         }
+                        break;
                     case R.id.followup_physiotherapy:
                         if (checked) {
                             physiotherapy = "165134";
                         } else {
                             physiotherapy = "";
                         }
+                        break;
                     case R.id.followup_other:
                         if (checked) {
                             followUpOther = "5622";
                         } else {
                             followUpOther = "";
                         }
+                        break;
+                    default:
+                        break;
+
+                }
+
+                updateValues();
+            }
+        });
+
+    }
+
+    public void radioButton(final RadioButton radioButton) {
+
+        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Is the button now checked?
+                boolean checked = (buttonView).isChecked();
+                int value = radioButton.getId();
+
+                // Check which radio button was clicked
+                switch (value) {
+                    case R.id.radio_admit_yes:
+                        if (checked)
+                            admit = "1065";
+                        break;
+                    case R.id.radio_admit_no:
+                        if (checked)
+                            admit = "1066";
+                        break;
                     default:
                         break;
 
@@ -278,6 +329,9 @@ public class Initial_page_6 extends Fragment {
     public void updateValues() {
 
         JSONArray jsonArry = new JSONArray();
+
+        jsonArry.put(JSONFormBuilder.observations("162477", "", "valueCoded", admit, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("162879", "", "valueDate", editTextAdmitReason.getText().toString(), DateCalendar.date(), ""));
 
         jsonArry.put(JSONFormBuilder.observations("165122", "", "valueCoded", continueCare, DateCalendar.date(), ""));
         jsonArry.put(JSONFormBuilder.observations("5096", "", "valueDate", editTextReturnDate.getText().toString(), DateCalendar.date(), ""));

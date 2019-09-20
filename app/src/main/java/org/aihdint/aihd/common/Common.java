@@ -133,6 +133,12 @@ public class Common {
         }
     }
 
+    public static void checkRespiratory(View view, String rr) {
+        if (rr.length() != 0 && (Double.parseDouble(rr) < 12 || Double.parseDouble(rr) > 20)) {
+            Alerts.errorMessage(view, "Kindly confirm if the Respiratory Rate entered is correct.");
+        }
+    }
+
     public static void monofilament(View view, String value) {
         if ((value.length() != 0) && (Double.parseDouble(value) > 5)) {
             Alerts.errorMessage(view, "Abnormal Monofilament.");

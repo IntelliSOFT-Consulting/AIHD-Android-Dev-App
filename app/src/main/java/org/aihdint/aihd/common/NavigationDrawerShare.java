@@ -107,13 +107,13 @@ public class NavigationDrawerShare implements NavigationView.OnNavigationItemSel
             dm_followup.putExtra("isForm", "2");
             mContext.startActivity(dm_followup);
             ((Activity) mContext).finish();
-        } /*else if (id == R.id.nav_past_forms) {
+        } else if (id == R.id.nav_past_forms) {
             Intent forms = new Intent(mContext.getApplicationContext(), Patients.class);
             forms.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             forms.putExtra("isForm", "3");
             mContext.startActivity(forms);
             ((Activity)mContext).finish();
-        } else if (id == R.id.nav_add_patients) {
+        }/* else if (id == R.id.nav_add_patients) {
             Intent add_patient = new Intent(mContext.getApplicationContext(), Register.class);
             mContext.startActivity(add_patient);
             ((Activity) mContext).finish();

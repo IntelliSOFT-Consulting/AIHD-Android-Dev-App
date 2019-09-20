@@ -8,14 +8,14 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
             android:title="@string/home" />
-        <!--<item
-            android:id="@+id/nav_add_patients"
-            android:icon="@drawable/ic_person_add"
-            android:title="@string/add_patients" />-->
         <item
             android:id="@+id/nav_patients"
             android:icon="@drawable/ic_people"
             android:title="@string/patients" />
+        <item
+            android:id="@+id/nav_past_forms"
+            android:icon="@drawable/ic_folder"
+            android:title="@string/dm_htn_reports" />
         <item
             android:id="@+id/nav_dm_follow_up"
             android:icon="@drawable/ic_description"

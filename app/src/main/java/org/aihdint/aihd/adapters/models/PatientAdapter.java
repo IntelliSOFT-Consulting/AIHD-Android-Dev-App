@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,8 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.MyViewHo
         public void onClick(final View view) {
 
             @SuppressWarnings("deprecation") final Person person = patientList.get(getPosition());
+
+            Log.d("formType", person.getIsReport());
 
             if (person.getIsReport().matches("1")) {
                 Intent graph = new Intent(view.getContext(), DM_Initial.class);

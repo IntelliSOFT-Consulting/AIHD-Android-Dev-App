@@ -26,12 +26,12 @@ public class DrugsDose {
             frequencyNifedipine, frequencyChlorthalidone, frequencyHydrochlorothia, frequencyIndapamide, frequencyMethyldopa, frequencyHydralazine, frequencyPrazocin,
             frequencyInsulin, frequencySolubleInsulin, frequencyNPH1, frequencyNPH2;
 
-    public String continueCare, urinalysis, hba, microalbumin, creatinine, potassium, ecg, treatmentTest;
+    public String continueCare, urinalysis, hba, microalbumin, creatinine, potassium, ecg, lipid_profile, treatmentTest;
 
     public EditText editTextInsulin, editTextSolubleInsulin, editTextNPH1, editTextNPH2;
     public EditText editTextDiet, editTextPhysicalExercise, editTextHerbal, editTextTreatmentOther, editTextComment;
     public EditText editTextACE, editTextARB, editTextBeta, editTextCCB, editTextThiazide, editTextThiazideLike, editTextAntiHypertensives, editTextOGLA, editTextInsulinOther;
-    public EditText editTextReturnDate, editTextReferralLocation, editTextReferralDate, editTextReferralNote, editTextClinician;
+    public EditText editTextReturnDate, editTextReferralLocation, editTextReferralDate, editTextReferralNote, editTextClinician,editTextTreatmentFollowup;
 
     //SpinnerDose
     public static final String[] arraySpinnerCaptopril = new String[]{"Select", "5mg", "25mg", "50mg"};
@@ -63,12 +63,12 @@ public class DrugsDose {
     public static final String[] arraySpinnerHydrochlorothia = new String[]{"Select", "12.5mg ", "25mg"};
     public static final String[] arraySpinnerIndapamide = new String[]{"Select", "1.5mg", "2.5mg", "5mg"};
 
-    public static final String[] arraySpinnerMethyldopa = new String[]{"Select", "250mg", "500mg"};
+    public static final String[] arraySpinnerMethyldopa = new String[]{"Select", "250mg", "500mg", "1000mg"};
     public static final String[] arraySpinnerHydralazine = new String[]{"Select", "25mg",};
     public static final String[] arraySpinnerPrazocin = new String[]{"Select", "0.5mg", "1mg"};
 
     public static final String[] arraySpinnerMetformin = new String[]{"Select", "500mg", "850mg", "1000mg"};
-    public static final String[] arraySpinnerGlibenclamide = new String[]{"Select", "5mg"};
+    public static final String[] arraySpinnerGlibenclamide = new String[]{"Select", "2.5mg","5mg","7.5mg","10mg"};
 
     public DrugsDose(Context mContext) {
     }
@@ -86,8 +86,6 @@ public class DrugsDose {
         editTextTreatmentOther = view.findViewById(R.id.treatment_other_specify);
         editTextComment = view.findViewById(R.id.treatment_comment);
 
-        editTextComment = view.findViewById(R.id.treatment_comment);
-
         checkBoxEnalapril = view.findViewById(R.id.treatment_enalapril);
         checkBoxCaptopril = view.findViewById(R.id.treatment_captopril);
         checkBoxLisinopril = view.findViewById(R.id.treatment_lisinopril);
@@ -100,6 +98,9 @@ public class DrugsDose {
         checkBoxTelmisartan = view.findViewById(R.id.treatment_telmisartan);
         checkBoxValsartan = view.findViewById(R.id.treatment_valsartan);
         checkBoxOlmesartan = view.findViewById(R.id.treatment_olmesartan);
+
+        editTextTreatmentFollowup = view.findViewById(R.id.followup_other_reason);
+
 
     }
 

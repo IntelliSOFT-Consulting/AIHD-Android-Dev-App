@@ -185,10 +185,25 @@
             android:text="ECG" />
 
         <CheckBox
+            android:id="@+id/treatment_lipid_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fast Lipid Profile" />
+
+        <CheckBox
             android:id="@+id/treatment_followup_other"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Other" />
+
+        <customfonts.EditText_Roboto_Regular
+            android:id="@+id/treatment_followup_other_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Other"
+            android:padding="15dp"
+            android:textSize="13sp" />
+
 
     </LinearLayout>
 

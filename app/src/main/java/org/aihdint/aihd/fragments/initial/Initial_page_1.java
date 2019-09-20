@@ -332,6 +332,7 @@ public class Initial_page_1 extends Fragment {
             radioGroupDiabetes.setVisibility(View.VISIBLE);
         } else if (status.matches("165087")) {
             radioGroupDiabetes.setVisibility(View.VISIBLE);
+            editTextDiagnosisDiabetes.setVisibility(View.GONE);
         } else {
             editTextDiagnosisDiabetes.setVisibility(View.GONE);
             radioGroupDiabetes.setVisibility(View.GONE);

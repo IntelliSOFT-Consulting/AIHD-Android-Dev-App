@@ -3,6 +3,7 @@ package org.aihdint.aihd.fragments.initial;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,7 +41,7 @@ public class Initial_page_2 extends Fragment {
 
     private EditText editTextTemp, editTextPulseRate, editTextSystolicOne, editTextDiastolicOne, editTextSystolicTwo, editTextDiastolicTwo, editTextWaist,
             editTextHip, editTextHeight, editTextWeight, editTextRespiratoryRate, editTextExamOther, editTextVisual, editTextCVS, editTextRS, editTextPA, editTextCNS,
-            editTextMonofilamentRF, editTextMonofilamentLF;
+            editTextMonofilamentRF, editTextMonofilamentLF, editTextFootRiskComments, editTextFootExamComments;
 
     private TextView_Roboto_Bold bmi, waist_hip_ratio;
 
@@ -49,7 +50,9 @@ public class Initial_page_2 extends Fragment {
 
     private String general_exam, pallor, jaundice, cyanosis, lymphadenopathy, oedema, dehydration, exam_other, visual_impairment, cvs, rs, pa, cns, extremities;
     private String ulcers, callouses, hardened_nails, fungus, cellulitis, edema, dry;
+    private String peripheral_neuropathy, ulcers_foot, amputation, acute_joint, low_current_risk, at_risk, high_risk, ulcerated_foot, foot_emergency;
 
+    private String pedal_pulse, peripheral_neuropathy_exam, deformity, foot_ulcer, amputation_exam, acute_joint_exam, sensation_loss;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -152,6 +155,9 @@ public class Initial_page_2 extends Fragment {
         bmi = view.findViewById(R.id.bmi);
         waist_hip_ratio = view.findViewById(R.id.waist_hip_ratio);
 
+        editTextFootRiskComments = view.findViewById(R.id.foot_risk_comments);
+        editTextFootExamComments = view.findViewById(R.id.foot_exam_comments);
+
         textWatcher(editTextTemp, "temp");
         textWatcher(editTextPulseRate, "pulseRate");
         textWatcher(editTextSystolicOne, "blood_pressure");
@@ -162,7 +168,7 @@ public class Initial_page_2 extends Fragment {
         textWatcher(editTextWeight, "bmi");
         textWatcher(editTextWaist, "whr");
         textWatcher(editTextHip, "whr");
-        textWatcher(editTextRespiratoryRate, "");
+        textWatcher(editTextRespiratoryRate, "respiratoryRate");
         textWatcher(editTextExamOther, "");
         textWatcher(editTextVisual, "");
         textWatcher(editTextCVS, "");
@@ -171,6 +177,8 @@ public class Initial_page_2 extends Fragment {
         textWatcher(editTextCNS, "");
         textWatcher(editTextMonofilamentRF, "monofilament");
         textWatcher(editTextMonofilamentLF, "monofilament");
+        textWatcher(editTextFootRiskComments, "");
+        textWatcher(editTextFootExamComments, "");
 
         RadioButton radioButtonExamFair = view.findViewById(R.id.radio_exam_fair);
         RadioButton radioButtonExamGood = view.findViewById(R.id.radio_exam_good);
@@ -188,6 +196,41 @@ public class Initial_page_2 extends Fragment {
         RadioButton radioButtonExtremitiesNormal = view.findViewById(R.id.radio_extremities_normal);
         RadioButton radioButtonExtremitiesAbnormal = view.findViewById(R.id.radio_extremities_abnormal);
 
+        RadioButton radioButtonTreatmentPedalPulse = view.findViewById(R.id.radio_foot_exam_treatment_pedal_pulse);
+        RadioButton radioButtonResolvedPedalPulse = view.findViewById(R.id.radio_foot_exam_resolved_pedal_pulse);
+        RadioButton radioButtonReferralPedalPulse = view.findViewById(R.id.radio_foot_exam_referral_pedal_pulse);
+        RadioButton radioButtonFootSavedPedalPulse = view.findViewById(R.id.radio_foot_exam_saved_pedal_pulse);
+
+        RadioButton radioButtonTreatmentPeripheralNeuropathy = view.findViewById(R.id.radio_foot_exam_treatment_peripheral_neuropathy);
+        RadioButton radioButtonResolvedPeripheralNeuropathy = view.findViewById(R.id.radio_foot_exam_resolved_peripheral_neuropathy);
+        RadioButton radioButtonReferralPeripheralNeuropathy = view.findViewById(R.id.radio_foot_exam_referral_peripheral_neuropathy);
+        RadioButton radioButtonFootSavedPPeripheralNeuropathy = view.findViewById(R.id.radio_foot_exam_saved_peripheral_neuropathy);
+
+        RadioButton radioButtonTreatmentDeformity = view.findViewById(R.id.radio_foot_exam_treatment_deformity);
+        RadioButton radioButtonResolvedDeformity = view.findViewById(R.id.radio_foot_exam_resolved_deformity);
+        RadioButton radioButtonReferralDeformity = view.findViewById(R.id.radio_foot_exam_referral_deformity);
+        RadioButton radioButtonFootSavedDeformity = view.findViewById(R.id.radio_foot_exam_saved_deformity);
+
+        RadioButton radioButtonTreatmentFootUcler = view.findViewById(R.id.radio_foot_exam_treatment_foot_ulcer);
+        RadioButton radioButtonResolvedFootUcler = view.findViewById(R.id.radio_foot_exam_resolved_foot_ulcer);
+        RadioButton radioButtonReferralFootUcler = view.findViewById(R.id.radio_foot_exam_referral_foot_ulcer);
+        RadioButton radioButtonFootSavedFootUcler = view.findViewById(R.id.radio_foot_exam_saved_foot_ulcer);
+
+        RadioButton radioButtonTreatmentAmputation = view.findViewById(R.id.radio_foot_exam_treatment_amputation);
+        RadioButton radioButtonResolvedAmputation = view.findViewById(R.id.radio_foot_exam_resolved_amputation);
+        RadioButton radioButtonReferralAmputation = view.findViewById(R.id.radio_foot_exam_referral_amputation);
+        RadioButton radioButtonFootSavedAmputation = view.findViewById(R.id.radio_foot_exam_saved_amputation);
+
+        RadioButton radioButtonTreatmentAcuteJoint = view.findViewById(R.id.radio_foot_exam_treatment_acute_joint);
+        RadioButton radioButtonResolvedAcuteJoint = view.findViewById(R.id.radio_foot_exam_resolved_acute_joint);
+        RadioButton radioButtonReferralAcuteJoint = view.findViewById(R.id.radio_foot_exam_referral_acute_joint);
+        RadioButton radioButtonFootSavedAcuteJoint = view.findViewById(R.id.radio_foot_exam_saved_acute_joint);
+
+        RadioButton radioButtonTreatmentSensationLoss = view.findViewById(R.id.radio_foot_exam_treatment_sensation_loss);
+        RadioButton radioButtonResolvedSensationLoss = view.findViewById(R.id.radio_foot_exam_resolved_sensation_loss);
+        RadioButton radioButtonReferralSensationLoss = view.findViewById(R.id.radio_foot_exam_referral_sensation_loss);
+        RadioButton radioButtonFootSavedSensationLoss = view.findViewById(R.id.radio_foot_exam_saved_sensation_loss);
+
         radioButton(radioButtonExamFair);
         radioButton(radioButtonExamGood);
         radioButton(radioButtonExamSick);
@@ -203,6 +246,42 @@ public class Initial_page_2 extends Fragment {
         radioButton(radioButtonCNSAbnormal);
         radioButton(radioButtonExtremitiesNormal);
         radioButton(radioButtonExtremitiesAbnormal);
+
+        radioButton(radioButtonTreatmentPedalPulse);
+        radioButton(radioButtonResolvedPedalPulse);
+        radioButton(radioButtonReferralPedalPulse);
+        radioButton(radioButtonFootSavedPedalPulse);
+
+        radioButton(radioButtonTreatmentPeripheralNeuropathy);
+        radioButton(radioButtonResolvedPeripheralNeuropathy);
+        radioButton(radioButtonReferralPeripheralNeuropathy);
+        radioButton(radioButtonFootSavedPPeripheralNeuropathy);
+
+        radioButton(radioButtonTreatmentDeformity);
+        radioButton(radioButtonResolvedDeformity);
+        radioButton(radioButtonReferralDeformity);
+        radioButton(radioButtonFootSavedDeformity);
+
+        radioButton(radioButtonTreatmentFootUcler);
+        radioButton(radioButtonResolvedFootUcler);
+        radioButton(radioButtonReferralFootUcler);
+        radioButton(radioButtonFootSavedFootUcler);
+
+        radioButton(radioButtonTreatmentAmputation);
+        radioButton(radioButtonResolvedAmputation);
+        radioButton(radioButtonReferralAmputation);
+        radioButton(radioButtonFootSavedAmputation);
+
+        radioButton(radioButtonTreatmentAcuteJoint);
+        radioButton(radioButtonResolvedAcuteJoint);
+        radioButton(radioButtonReferralAcuteJoint);
+        radioButton(radioButtonFootSavedAcuteJoint);
+
+        radioButton(radioButtonTreatmentSensationLoss);
+        radioButton(radioButtonResolvedSensationLoss);
+        radioButton(radioButtonReferralSensationLoss);
+        radioButton(radioButtonFootSavedSensationLoss);
+
 
         CheckBox checkBoxPallor = view.findViewById(R.id.checkbox_exam_pallor);
         CheckBox checkBoxJaundice = view.findViewById(R.id.checkbox_exam_jaundice);
@@ -220,6 +299,17 @@ public class Initial_page_2 extends Fragment {
         CheckBox checkBoxEdema = view.findViewById(R.id.checkbox_extremities_edema);
         CheckBox checkBoxDry = view.findViewById(R.id.checkbox_extremities_dry);
 
+        CheckBox checkboxPeripheralNeuropathy = view.findViewById(R.id.checkbox_peripheral_neuropathy);
+        CheckBox checkboxUlcers = view.findViewById(R.id.checkbox_ulcers);
+        CheckBox checkboxAmputation = view.findViewById(R.id.checkbox_amputation);
+        CheckBox checkboxAcuteJoint = view.findViewById(R.id.checkbox_acute_joint);
+        CheckBox checkboxLowRisk = view.findViewById(R.id.checkbox_low_risk);
+        CheckBox checkboxAtRisk = view.findViewById(R.id.checkbox_at_risk);
+        CheckBox checkboxHighRisk = view.findViewById(R.id.checkbox_high_risk);
+        CheckBox checkboxUlceratedFoot = view.findViewById(R.id.checkbox_ulcerated_foot);
+        CheckBox checkboxFootEmergency = view.findViewById(R.id.checkbox_foot_emergency);
+
+
         checkBox(checkBoxPallor);
         checkBox(checkBoxJaundice);
         checkBox(checkBoxCyanosis);
@@ -235,6 +325,16 @@ public class Initial_page_2 extends Fragment {
         checkBox(checkBoxCellutis);
         checkBox(checkBoxEdema);
         checkBox(checkBoxDry);
+
+        checkBox(checkboxPeripheralNeuropathy);
+        checkBox(checkboxUlcers);
+        checkBox(checkboxAmputation);
+        checkBox(checkboxAcuteJoint);
+        checkBox(checkboxLowRisk);
+        checkBox(checkboxAtRisk);
+        checkBox(checkboxHighRisk);
+        checkBox(checkboxUlceratedFoot);
+        checkBox(checkboxFootEmergency);
 
         return view;
     }
@@ -289,6 +389,9 @@ public class Initial_page_2 extends Fragment {
                                 break;
                             case "pulseRate":
                                 Common.checkPR(linearLayoutPastCurrentMedication, editable.toString());
+                                break;
+                            case "respiratoryRate":
+                                Common.checkRespiratory(linearLayoutPastCurrentMedication, editable.toString());
                                 break;
                             case "blood_pressure":
                                 if (editTextSystolicTwo != null && editTextDiastolicTwo != null) {
@@ -637,6 +740,72 @@ public class Initial_page_2 extends Fragment {
                             dry = "";
                         }
                         break;
+                    case R.id.checkbox_peripheral_neuropathy:
+                        if (checked) {
+                            peripheral_neuropathy = "118983";
+                        } else {
+                            peripheral_neuropathy = "";
+                        }
+                        break;
+                    case R.id.checkbox_ulcers:
+                        if (checked) {
+                            ulcers_foot = "123919";
+                        } else {
+                            ulcers_foot = "";
+                        }
+                        break;
+                    case R.id.checkbox_amputation:
+                        if (checked) {
+                            amputation = "164009";
+                        } else {
+                            amputation = "";
+                        }
+                        break;
+                    case R.id.checkbox_acute_joint:
+                        if (checked) {
+                            acute_joint = "165317";
+                        } else {
+                            acute_joint = "";
+                        }
+                        break;
+                    case R.id.checkbox_low_risk:
+                        if (checked) {
+                            low_current_risk = "165338";
+                        } else {
+                            low_current_risk = "";
+                        }
+                        break;
+                    case R.id.checkbox_at_risk:
+                        if (checked) {
+                            at_risk = "165321";
+                        } else {
+                            at_risk = "";
+                        }
+                        break;
+                    case R.id.checkbox_high_risk:
+                        if (checked) {
+                            high_risk = "165320";
+                        } else {
+                            high_risk = "";
+                        }
+                        break;
+                    case R.id.checkbox_ulcerated_foot:
+                        if (checked) {
+                            ulcerated_foot = "163411";
+                        } else {
+                            ulcerated_foot = "";
+                        }
+                        break;
+                    case R.id.checkbox_foot_emergency:
+                        if (checked) {
+                            foot_emergency = "165319";
+                        } else {
+                            foot_emergency = "";
+                        }
+                        break;
+                        default:
+                            break;
+
                 }
 
                 updateValues();
@@ -739,6 +908,129 @@ public class Initial_page_2 extends Fragment {
                             extremities = "1116";
                         extremitiesStatus(extremities);
                         break;
+
+                    case R.id.radio_foot_exam_treatment_pedal_pulse:
+                        if (checked)
+                            pedal_pulse = "160749";
+                        break;
+                    case R.id.radio_foot_exam_resolved_pedal_pulse:
+                        if (checked)
+                            pedal_pulse = "6097";
+                        break;
+                    case R.id.radio_foot_exam_referral_pedal_pulse:
+                        if (checked)
+                            pedal_pulse = "165192";
+                        break;
+                    case R.id.radio_foot_exam_saved_pedal_pulse:
+                        if (checked)
+                            pedal_pulse = "165329";
+                        break;
+
+                    case R.id.radio_foot_exam_treatment_peripheral_neuropathy:
+                        if (checked)
+                            peripheral_neuropathy_exam = "160749";
+                        break;
+                    case R.id.radio_foot_exam_resolved_peripheral_neuropathy:
+                        if (checked)
+                            peripheral_neuropathy_exam = "6097";
+                        break;
+                    case R.id.radio_foot_exam_referral_peripheral_neuropathy:
+                        peripheral_neuropathy_exam = "165192";
+                        break;
+                    case R.id.radio_foot_exam_saved_peripheral_neuropathy:
+                        if (checked)
+                            peripheral_neuropathy_exam = "165329";
+                        break;
+
+                    case R.id.radio_foot_exam_treatment_deformity:
+                        if (checked)
+                            deformity = "160749";
+                        break;
+                    case R.id.radio_foot_exam_resolved_deformity:
+                        if (checked)
+                            deformity = "6097";
+                        break;
+                    case R.id.radio_foot_exam_referral_deformity:
+                        if (checked)
+                            deformity = "165192";
+                        break;
+                    case R.id.radio_foot_exam_saved_deformity:
+                        if (checked)
+                            deformity = "165329";
+                        break;
+
+                    case R.id.radio_foot_exam_treatment_foot_ulcer:
+                        if (checked)
+                            foot_ulcer = "160749";
+                        break;
+
+                    case R.id.radio_foot_exam_resolved_foot_ulcer:
+                        if (checked)
+                            foot_ulcer = "6097";
+                        break;
+                    case R.id.radio_foot_exam_referral_foot_ulcer:
+                        if (checked)
+                            foot_ulcer = "165192";
+                        break;
+                    case R.id.radio_foot_exam_saved_foot_ulcer:
+                        if (checked)
+                            foot_ulcer = "165329";
+                        break;
+
+                    case R.id.radio_foot_exam_treatment_amputation:
+                        if (checked)
+                            amputation_exam = "160749";
+                        break;
+
+                    case R.id.radio_foot_exam_resolved_amputation:
+                        if (checked)
+                            amputation_exam = "6097";
+                        break;
+                    case R.id.radio_foot_exam_referral_amputation:
+                        if (checked)
+                            amputation_exam = "165192";
+                        break;
+                    case R.id.radio_foot_exam_saved_amputation:
+                        if (checked)
+                            amputation_exam = "165329";
+                        break;
+
+                    case R.id.radio_foot_exam_treatment_acute_joint:
+                        if (checked)
+                            acute_joint_exam = "160749";
+                        break;
+
+                    case R.id.radio_foot_exam_resolved_acute_joint:
+                        if (checked)
+                            acute_joint_exam = "6097";
+                        break;
+                    case R.id.radio_foot_exam_referral_acute_joint:
+                        if (checked)
+                            acute_joint_exam = "165192";
+                        break;
+                    case R.id.radio_foot_exam_saved_acute_joint:
+                        if (checked)
+                            acute_joint_exam = "165329";
+                        break;
+
+                    case R.id.radio_foot_exam_treatment_sensation_loss:
+                        if (checked)
+                            sensation_loss = "160749";
+                        break;
+
+                    case R.id.radio_foot_exam_resolved_sensation_loss:
+                        if (checked)
+                            sensation_loss = "6097";
+                        break;
+                    case R.id.radio_foot_exam_referral_sensation_loss:
+                        if (checked)
+                            sensation_loss = "165192";
+                        break;
+                    case R.id.radio_foot_exam_saved_sensation_loss:
+                        if (checked)
+                            sensation_loss = "165329";
+                        break;
+
 
                 }
 
@@ -852,15 +1144,45 @@ public class Initial_page_2 extends Fragment {
         jsonArry.put(JSONFormBuilder.observations("165116", "", "valueNumeric", editTextMonofilamentRF.getText().toString().trim(), DateCalendar.date(), ""));
         jsonArry.put(JSONFormBuilder.observations("165117", "", "valueNumeric", editTextMonofilamentLF.getText().toString().trim(), DateCalendar.date(), ""));
 
+        jsonArry.put(JSONFormBuilder.observations("165316", "", "valueCoded", peripheral_neuropathy, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165316", "", "valueCoded", ulcers_foot, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165316", "", "valueCoded", amputation, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165316", "", "valueCoded", acute_joint, DateCalendar.date(), ""));
+
+        jsonArry.put(JSONFormBuilder.observations("165337", "", "valueText", editTextFootRiskComments.getText().toString().trim(), DateCalendar.date(), ""));
+
+        jsonArry.put(JSONFormBuilder.observations("165318", "", "valueCoded", low_current_risk, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165318", "", "valueCoded", at_risk, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165318", "", "valueCoded", high_risk, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165318", "", "valueCoded", ulcerated_foot, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165318", "", "valueCoded", foot_emergency, DateCalendar.date(), ""));
+
+        jsonArry.put(JSONFormBuilder.observations("165339", "", "valueCoded", pedal_pulse, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165324", "", "valueCoded", peripheral_neuropathy_exam, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165325", "", "valueCoded", deformity, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165326", "", "valueCoded", foot_ulcer, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165340", "", "valueCoded", amputation_exam, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165327", "", "valueCoded", acute_joint_exam, DateCalendar.date(), ""));
+        jsonArry.put(JSONFormBuilder.observations("165328", "", "valueCoded", sensation_loss, DateCalendar.date(), ""));
+
+        jsonArry.put(JSONFormBuilder.observations("165337", "", "valueText", editTextFootExamComments.getText().toString().trim(), DateCalendar.date(), ""));
+
         try {
 
-            jsonArry1 = JSONFormBuilder.concatArray(jsonArry1);
-            jsonArry2 = JSONFormBuilder.concatArray(jsonArry2);
 
             jsonArry = JSONFormBuilder.concatArray(jsonArry);
 
-            jsonGroup = JSONFormBuilder.checkLength(jsonArry1, jsonGroup);
-            jsonGroup = JSONFormBuilder.checkLength(jsonArry2, jsonGroup);
+            JSONFormBuilder.checkLength(JSONFormBuilder.concatArray(jsonArry1), jsonGroup);
+            JSONFormBuilder.checkLength(JSONFormBuilder.concatArray(jsonArry2), jsonGroup);
+            JSONFormBuilder.checkLength(JSONFormBuilder.concatArray(jsonArry3), jsonGroup);
+            JSONFormBuilder.checkLength(JSONFormBuilder.concatArray(jsonArry4), jsonGroup);
+            JSONFormBuilder.checkLength(JSONFormBuilder.concatArray(jsonArry5), jsonGroup);
+            JSONFormBuilder.checkLength(JSONFormBuilder.concatArray(jsonArry6), jsonGroup);
+            JSONFormBuilder.checkLength(JSONFormBuilder.concatArray(jsonArry7), jsonGroup);
+            JSONFormBuilder.checkLength(JSONFormBuilder.concatArray(jsonArry8), jsonGroup);
+            JSONFormBuilder.checkLength(JSONFormBuilder.concatArray(jsonArry9), jsonGroup);
+            JSONFormBuilder.checkLength(JSONFormBuilder.concatArray(jsonArry10), jsonGroup);
+            JSONFormBuilder.checkLength(JSONFormBuilder.concatArray(jsonArry11), jsonGroup);
 
             if (jsonGroup.length() > 0) {
                 JSONObject jsonObject = new JSONObject();

@@ -3,6 +3,7 @@ package org.aihdint.aihd.common;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Environment;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -40,7 +41,7 @@ public class JSONFormBuilder {
         return jsonObs;
     }
 
-    public static JSONArray checkLength(JSONArray jsonArray, JSONArray jsonObs) {
+    public static JSONArray checkLength(JSONArray jsonArray,JSONArray jsonObs) {
         if (jsonArray.length() > 0) {
             jsonObs.put(jsonArray);
         }

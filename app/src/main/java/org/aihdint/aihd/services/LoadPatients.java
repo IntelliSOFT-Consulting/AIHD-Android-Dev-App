@@ -25,6 +25,7 @@ import java.util.Map;
 
 public class LoadPatients extends IntentService {
     private Gson patientsGson;
+    private static final String TAG = LoadPatients.class.getSimpleName();
 
     public LoadPatients() {
         super(LoadPatients.class.getSimpleName());
@@ -52,6 +53,7 @@ public class LoadPatients extends IntentService {
 
             @Override
             public void onResponse(String response) {
+                Log.d(TAG, "Load Response: " + response);
                 try {
                     JSONObject jsonObj = new JSONObject(response);
 

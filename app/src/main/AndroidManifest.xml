@@ -128,20 +128,8 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".patient.Admission"
-            android:label="Admission"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
             android:name=".patient.Transfer"
             android:label="Transfer"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name=".patient.FootClinic"
-            android:label="Foot Clinic"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
 
@@ -153,6 +141,7 @@
 
         <activity
             android:name=".forms.DM_HTN_Forms"
+            android:label="DM Forms"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
@@ -201,7 +190,6 @@
             android:name=".Resources.Pdf4"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Resources.Pdf5"
             android:theme="@style/AppTheme.NoActionBar"
