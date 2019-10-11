@@ -15,7 +15,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/background"
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
@@ -326,6 +325,27 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <customfonts.TextView_Roboto_Bold
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="Respiratory rate (B/m)" />
+
+                            <customfonts.EditText_Roboto_Regular
+                                android:id="@+id/respiratory_rate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Respiratory rate (B/m)"
+                                android:inputType="numberDecimal"
+                                android:padding="15dp"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -364,13 +384,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/background"
                     android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
 
                         <customfonts.TextView_Roboto_Bold
                             android:layout_width="match_parent"
@@ -425,9 +439,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-
                                 android:layout_weight=".50"
-                                android:text="Foot Check/Annual Foot Exam" />
+                                android:text="Annual Foot Check/Exam" />
 
                             <customfonts.EditText_Roboto_Regular
                                 android:id="@+id/foot_exam"
@@ -450,8 +463,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".5"
-
-                                android:text="Eye Exam" />
+                                android:text="Eye Exam(funduscopy)" />
 
                             <customfonts.EditText_Roboto_Regular
                                 android:id="@+id/eye_exam"
@@ -474,7 +486,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".5"
-
                                 android:text="Dental Exam" />
 
                             <customfonts.EditText_Roboto_Regular
@@ -491,14 +502,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:weightSum="1">
+                            android:weightSum="1"
+                            android:visibility="gone">
 
                             <CheckBox
                                 android:id="@+id/checkbox_eye_check_up"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".5"
-
                                 android:text="Eye Check Up" />
 
                             <customfonts.EditText_Roboto_Regular
@@ -511,15 +522,66 @@
                                 android:textSize="13sp" />
                         </LinearLayout>
 
+                    <customfonts.TextView_Roboto_Bold
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Pregnancy Status" />
 
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radio_pregnancy_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes" />
+
+                        <RadioButton
+                            android:id="@+id/radio_pregnancy_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No" />
+
+                        <RadioButton
+                            android:id="@+id/radio_pregnancy_na"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="N/A" />
+                    </RadioGroup>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <customfonts.TextView_Roboto_Bold
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="LMP" />
+
+                        <customfonts.EditText_Roboto_Regular
+                            android:id="@+id/date_lmp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:hint="yyyy-mm-dd"
+                            android:inputType="text"
+                            android:padding="15dp"
+                            android:textSize="13sp" />
                     </LinearLayout>
+
+                    <include
+                        layout="@layout/content_physical_exam"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
-
-            <include
-                layout="@layout/content_foot_clinic"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
 
             <android.support.v7.widget.CardView
@@ -529,13 +591,6 @@
                 android:background="@drawable/round_border"
                 app:cardCornerRadius="5dp"
                 card_view:cardElevation="9dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/background"
-                    android:orientation="vertical">
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -871,8 +926,6 @@
                         </LinearLayout>
                     </LinearLayout>
 
-
-                </LinearLayout>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -881,12 +934,12 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/round_border"
                 app:cardCornerRadius="5dp"
-                card_view:cardElevation="9dp">
+                card_view:cardElevation="9dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/background"
                     android:orientation="vertical">
 
                     <customfonts.TextView_Roboto_Bold
@@ -933,268 +986,6 @@
                         </RadioGroup>
                     </LinearLayout>
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginBottom="25dp"
-                android:background="@drawable/round_border"
-                app:cardCornerRadius="5dp"
-                card_view:cardElevation="9dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/background"
-                    android:orientation="vertical">
-
-                    <customfonts.TextView_Roboto_Bold
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background_header"
-                        android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
-                        android:text="Laboratory Investigations:"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="vertical">
-
-                            <customfonts.TextView_Roboto_Bold
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Laboratory Date"
-                                android:textColor="@color/black"
-                                android:textSize="13sp" />
-
-                            <customfonts.EditText_Roboto_Regular
-                                android:id="@+id/date_labs"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:focusable="false"
-                                android:hint="yyyy-mm-dd"
-                                android:inputType="date"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
-
-                            <customfonts.TextView_Roboto_Bold
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:text="Fasting Blood Sugar (FBS)"
-                                android:textColor="@color/black"
-                                android:textSize="13sp" />
-
-                            <customfonts.EditText_Roboto_Regular
-                                android:id="@+id/followup_fbs"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:ems="10"
-                                android:inputType="numberDecimal"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
-
-                            <customfonts.TextView_Roboto_Bold
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:layout_weight="1.5"
-                                android:text="Random Blood Sugar (RBS)"
-                                android:textColor="@color/black"
-                                android:textSize="13sp" />
-
-                            <customfonts.EditText_Roboto_Regular
-                                android:id="@+id/followup_rbs"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:ems="10"
-                                android:inputType="numberDecimal"
-                                android:textSize="13sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
-
-                            <customfonts.TextView_Roboto_Bold
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:text="HbA1c"
-                                android:textColor="@color/black"
-                                android:textSize="13sp" />
-
-                            <customfonts.EditText_Roboto_Regular
-                                android:id="@+id/followup_hba"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:ems="10"
-                                android:inputType="numberDecimal"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
-
-                            <customfonts.TextView_Roboto_Bold
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:text="HDL"
-                                android:textColor="@color/black"
-                                android:textSize="13sp" />
-
-                            <customfonts.EditText_Roboto_Regular
-                                android:id="@+id/followup_hdl"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:ems="10"
-                                android:inputType="numberDecimal"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
-
-                            <customfonts.TextView_Roboto_Bold
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:text="LDL"
-                                android:textColor="@color/black"
-                                android:textSize="13sp" />
-
-                            <customfonts.EditText_Roboto_Regular
-                                android:id="@+id/followup_ldl"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:ems="10"
-                                android:inputType="numberDecimal"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
-
-                            <customfonts.TextView_Roboto_Bold
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:text="Triglycerides"
-                                android:textColor="@color/black"
-                                android:textSize="13sp" />
-
-                            <customfonts.EditText_Roboto_Regular
-                                android:id="@+id/followup_triglycerides"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:ems="10"
-                                android:inputType="numberDecimal"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
-
-                            <customfonts.TextView_Roboto_Bold
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:text="UECs/ Creatinine"
-                                android:textColor="@color/black"
-                                android:textSize="13sp" />
-
-                            <customfonts.EditText_Roboto_Regular
-                                android:id="@+id/followup_uec"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:ems="10"
-                                android:inputType="numberDecimal"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
-
-                            <customfonts.TextView_Roboto_Bold
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:text="Urinalysis"
-                                android:textColor="@color/black"
-                                android:textSize="13sp" />
-
-                            <customfonts.EditText_Roboto_Regular
-                                android:id="@+id/followup_urinalysis"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:ems="10"
-                                android:inputType="numberDecimal"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 

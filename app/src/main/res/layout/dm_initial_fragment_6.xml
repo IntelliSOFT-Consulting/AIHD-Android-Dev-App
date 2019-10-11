@@ -92,10 +92,10 @@
                             android:id="@+id/admit_reason"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:focusable="false"
                             android:hint="Reason for Admission"
                             android:padding="10dp"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:imeOptions="actionDone"/>
 
                         <CheckBox
                             android:id="@+id/followup_continue"
@@ -111,7 +111,8 @@
                             android:hint="Return date"
                             android:inputType="date"
                             android:padding="10dp"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:imeOptions="actionDone"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -130,7 +131,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Facility"
                                 android:padding="10dp"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:imeOptions="actionDone"/>
 
                             <customfonts.EditText_Roboto_Regular
                                 android:id="@+id/date_referred"
@@ -140,7 +142,8 @@
                                 android:hint="Date referred"
                                 android:inputType="date"
                                 android:padding="10dp"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:imeOptions="actionDone"/>
 
                         </LinearLayout>
 
@@ -161,7 +164,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Health Facility"
                                 android:padding="10dp"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:imeOptions="actionDone"/>
 
                             <customfonts.EditText_Roboto_Regular
                                 android:id="@+id/date_transfer"
@@ -171,7 +175,8 @@
                                 android:hint="Date transferred out"
                                 android:inputType="date"
                                 android:padding="10dp"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:imeOptions="actionDone"/>
 
                         </LinearLayout>
 
@@ -190,7 +195,8 @@
                             android:hint="Referred For?"
                             android:inputType="text"
                             android:padding="10dp"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:imeOptions="actionDone"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -292,7 +298,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Support Group"
                                 android:padding="15dp"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:imeOptions="actionDone"/>
 
                         </LinearLayout>
 
@@ -315,7 +322,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Provider Name"
                                 android:padding="10dp"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:imeOptions="actionDone"/>
                         </LinearLayout>
 
                         <LinearLayout

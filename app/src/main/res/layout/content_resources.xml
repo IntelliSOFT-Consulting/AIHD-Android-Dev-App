@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.aihdint.aihd.Resources.ResourcesActivity">
+    tools:context=".resources.ResourcesActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,7 +48,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_marginTop="50dp"
@@ -96,6 +96,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="5. Cardiovascular Guidelines 2018"
+                android:layout_gravity="start"
+                android:textAlignment="textStart"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/pdf6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="6. User Manual"
                 android:layout_gravity="start"
                 android:textAlignment="textStart"
                 android:textSize="13sp" />

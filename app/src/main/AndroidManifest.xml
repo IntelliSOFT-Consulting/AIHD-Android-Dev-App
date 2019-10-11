@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.aihdint.aihd">
+    package="org.development.aihd.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,7 +14,7 @@
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="org.aihdint.aihd.app.AppController"
+        android:name=".app.AppController"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -39,10 +39,10 @@
             android:value="true" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="org.aihdint.aihd" />
+            android:value="org.development.aihd.app" />
 
         <activity
-            android:name=".SplashActivity"
+            android:name="org.development.aihd.app.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -98,13 +98,13 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".Resources.ResourcesActivity"
+            android:name=".resources.ResourcesActivity"
             android:label="@string/resources"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".Resources.HelpdeskActivity"
+            android:name=".resources.HelpdeskActivity"
             android:label="@string/helpdesk"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
@@ -174,26 +174,6 @@
             android:name=".app.ScheduledReceiver"
             android:process=":alarmReceiver" />
 
-        <activity
-            android:name=".Resources.Pdf1"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Resources.Pdf2"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Resources.Pdf3"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Resources.Pdf4"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Resources.Pdf5"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

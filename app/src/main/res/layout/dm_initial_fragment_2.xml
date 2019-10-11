@@ -296,27 +296,24 @@
                         <RadioGroup
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <RadioButton
                                 android:id="@+id/radio_adhere_yes"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-
                                 android:text="Yes" />
 
                             <RadioButton
                                 android:id="@+id/radio_adhere_no"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-
                                 android:text="No" />
 
                             <RadioButton
                                 android:id="@+id/radio_adhere_na"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-
                                 android:text="N/A" />
                         </RadioGroup>
 
@@ -350,20 +347,18 @@
                             <RadioGroup
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:orientation="horizontal">
 
                                 <RadioButton
                                     android:id="@+id/radio_allergies_yes"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-
                                     android:text="Yes" />
 
                                 <RadioButton
                                     android:id="@+id/radio_allergies_no"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-
                                     android:text="No" />
 
                             </RadioGroup>
@@ -711,26 +706,7 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
 
-                            <customfonts.TextView_Roboto_Bold
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="10dp"
-                                android:text="Respiratory rate (B/m)" />
-
-                            <customfonts.EditText_Roboto_Regular
-                                android:id="@+id/respiratory_rate"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Respiratory rate (B/m)"
-                                android:inputType="numberDecimal"
-                                android:padding="15dp"
-                                android:textSize="13sp" />
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -778,6 +754,48 @@
                                     android:padding="15dp"
                                     android:textSize="16sp" />
                             </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <customfonts.TextView_Roboto_Bold
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:text="Respiratory rate (B/m)" />
+
+                            <customfonts.EditText_Roboto_Regular
+                                android:id="@+id/respiratory_rate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Respiratory rate (B/m)"
+                                android:inputType="numberDecimal"
+                                android:padding="15dp"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <customfonts.TextView_Roboto_Bold
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:text="MUAC" />
+
+                            <customfonts.EditText_Roboto_Regular
+                                android:id="@+id/muac"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="MUAC"
+                                android:inputType="numberDecimal"
+                                android:padding="15dp"
+                                android:textSize="13sp" />
                         </LinearLayout>
 
                         <customfonts.TextView_Roboto_Bold
@@ -900,18 +918,19 @@
 
                                 <RadioGroup
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
 
                                     <RadioButton
                                         android:id="@+id/radio_visual_impairment_yes"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Yes"
                                         tools:ignore="TooDeepLayout" />
 
                                     <RadioButton
                                         android:id="@+id/radio_visual_impairment_no"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="No" />
 
@@ -941,253 +960,10 @@
                             </LinearLayout>
                         </LinearLayout>
 
-
-                        <LinearLayout
+                        <include
+                            layout="@layout/content_physical_exam"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:baselineAligned="false"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <customfonts.TextView_Roboto_Bold
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text="CVS" />
-
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-                                    <RadioButton
-                                        android:id="@+id/radio_cvs_normal"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Normal"
-                                        tools:ignore="TooDeepLayout" />
-
-                                    <RadioButton
-                                        android:id="@+id/radio_cvs_abnormal"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Abnormal" />
-                                </RadioGroup>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <customfonts.TextView_Roboto_Bold
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text="Describe" />
-
-                                <customfonts.EditText_Roboto_Regular
-                                    android:id="@+id/describe_cvs"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="Describe"
-                                    android:padding="15dp"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:baselineAligned="false"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <customfonts.TextView_Roboto_Bold
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text="RS" />
-
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-                                    <RadioButton
-                                        android:id="@+id/radio_rs_normal"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Normal"
-                                        tools:ignore="TooDeepLayout" />
-
-                                    <RadioButton
-                                        android:id="@+id/radio_rs_abnormal"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Abnormal" />
-                                </RadioGroup>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <customfonts.TextView_Roboto_Bold
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text="Describe" />
-
-                                <customfonts.EditText_Roboto_Regular
-                                    android:id="@+id/describe_rs"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="Describe"
-                                    android:padding="15dp"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:baselineAligned="false"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <customfonts.TextView_Roboto_Bold
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text="P/A" />
-
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-                                    <RadioButton
-                                        android:id="@+id/radio_pa_normal"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Normal"
-                                        tools:ignore="TooDeepLayout" />
-
-                                    <RadioButton
-                                        android:id="@+id/radio_pa_abnormal"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Abnormal" />
-
-                                </RadioGroup>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <customfonts.TextView_Roboto_Bold
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text="Describe" />
-
-                                <customfonts.EditText_Roboto_Regular
-                                    android:id="@+id/describe_pa"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="Describe"
-                                    android:padding="15dp"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:baselineAligned="false"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <customfonts.TextView_Roboto_Bold
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text="CNS" />
-
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-                                    <RadioButton
-                                        android:id="@+id/radio_cns_normal"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Normal"
-                                        tools:ignore="TooDeepLayout" />
-
-                                    <RadioButton
-                                        android:id="@+id/radio_cns_abnormal"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Abnormal" />
-
-                                </RadioGroup>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <customfonts.TextView_Roboto_Bold
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text="Describe" />
-
-                                <customfonts.EditText_Roboto_Regular
-                                    android:id="@+id/describe_cns"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="Describe"
-                                    android:padding="15dp"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-                        </LinearLayout>
-
+                            android:layout_height="match_parent" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -1279,6 +1055,14 @@
                                     android:text="Dry" />
                             </LinearLayout>
                         </LinearLayout>
+
+                        <customfonts.EditText_Roboto_Regular
+                            android:id="@+id/physical_exam_other"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Other Physical Exam"
+                            android:padding="15dp"
+                            android:textSize="13sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

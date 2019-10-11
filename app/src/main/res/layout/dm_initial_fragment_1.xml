@@ -445,7 +445,7 @@
                                     android:id="@+id/radio_hiv_unknown"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Uknown" />
+                                    android:text="Unknown" />
                             </RadioGroup>
                         </LinearLayout>
 
